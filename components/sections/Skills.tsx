@@ -111,7 +111,7 @@ export const Skills = () => {
                     {skillGroup.items.map((skill) => (
                       <span
                         key={skill}
-                        className="px-5 py-2.5 rounded-2xl bg-muted/30 border border-border/50 text-sm font-bold tracking-tight hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
+                        className="px-5 py-2.5 rounded-2xl bg-muted/30 border border-border/50 text-sm font-bold tracking-tight hover:border-primary/50 hover:bg-primary/5 hover:next-gen-gradient hover:scale-110 transition-all duration-300 font-heading cursor-default"
                       >
                         {skill}
                       </span>

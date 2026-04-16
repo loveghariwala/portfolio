@@ -128,7 +128,7 @@ export const About = () => {
           <div className="lg:col-span-7 space-y-12">
             <div className="space-y-8">
               <p className="text-2xl md:text-3xl font-medium leading-normal text-foreground/90">
-                Hello, I’m <span className="text-primary font-bold">{DATA.personal.name}</span>. A visionary developer based in <span className="underline decoration-accent decoration-4 underline-offset-8">{DATA.personal.location}</span>.
+                Hello, I’m <span className="next-gen-gradient font-black font-heading">{DATA.personal.name}</span>. A visionary developer based in <span className="underline decoration-accent decoration-4 underline-offset-8">{DATA.personal.location}</span>.
               </p>
               <div className="h-px w-full bg-gradient-to-r from-border via-border/20 to-transparent" />
               <p className="text-xl text-secondary leading-relaxed">

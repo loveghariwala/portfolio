@@ -81,7 +81,7 @@ export const Hero = () => {
             <motion.div variants={fadeUp}>
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-black tracking-tighter leading-[0.95] mb-8">
                 Turning bits into <br />
-                <span className="gradient-text">Masterpieces.</span>
+                <span className="next-gen-gradient">Masterpieces.</span>
               </h1>
             </motion.div>
 
@@ -90,7 +90,7 @@ export const Hero = () => {
               variants={fadeUp}
               className="text-lg md:text-xl text-secondary max-w-xl font-medium leading-relaxed mb-12"
             >
-              I am <span className="text-foreground">{DATA.personal.name}</span>, a professional <span className="text-foreground">{DATA.personal.role}</span>. {DATA.personal.bio.split(".")[0]}. I specialize in crafting high-end, scalable digital products.
+              I am <span className="next-gen-gradient font-black font-heading">{DATA.personal.name}</span>, a professional <span className="next-gen-gradient font-black font-heading">{DATA.personal.role}</span>. {DATA.personal.bio.split(".")[0]}. I specialize in crafting high-end, scalable digital products.
             </motion.p>
 
             {/* CTA Buttons */}

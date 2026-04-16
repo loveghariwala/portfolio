@@ -15,31 +15,183 @@ export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
    const resumeRef = useRef<HTMLDivElement>(null);
 
    useEffect(() => {
-     if (isOpen) {
-       document.body.style.overflow = 'hidden';
-     } else {
-       document.body.style.overflow = 'unset';
-     }
+     if (isOpen) document.body.style.overflow = 'hidden';
+     else document.body.style.overflow = 'unset';
      return () => { document.body.style.overflow = 'unset'; };
    }, [isOpen]);
+
+   const generateResumeHTML = () => `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>${DATA.personal.name} - Resume</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@page { size: A4; margin: 0; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;color:#1e293b;background:#fff;font-size:8.5pt;line-height:1.45;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+
+.page{max-width:210mm;margin:0 auto;padding:20px 28px 16px;}
+
+/* HEADER */
+.hdr{text-align:center;padding-bottom:12px;border-bottom:2.5px solid #0f172a;margin-bottom:10px;}
+.hdr h1{font-size:26pt;font-weight:900;color:#0f172a;letter-spacing:-1px;line-height:1;}
+.hdr .subtitle{font-size:8.5pt;font-weight:600;color:#2563eb;letter-spacing:2px;text-transform:uppercase;margin:4px 0 8px;}
+.hdr .contact{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;font-size:7.5pt;color:#64748b;}
+.hdr .contact a{color:#2563eb;text-decoration:none;font-weight:600;}
+.hdr .sep{color:#cbd5e1;}
+
+/* SECTIONS */
+.sec{margin-bottom:9px;}
+.sec-title{font-size:8pt;font-weight:800;text-transform:uppercase;letter-spacing:2.5px;color:#0f172a;border-bottom:1.5px solid #e2e8f0;padding-bottom:3px;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.sec-title::before{content:'';display:inline-block;width:3px;height:12px;background:#2563eb;border-radius:1px;}
+
+/* SKILLS */
+.skills-row{display:flex;flex-wrap:wrap;gap:4px;}
+.skill{font-size:7pt;font-weight:600;padding:2.5px 8px;border:1px solid #2563eb;border-radius:20px;color:#2563eb;background:#eff6ff;}
+
+/* EXPERIENCE */
+.exp{margin-bottom:7px;}
+.exp-top{display:flex;justify-content:space-between;align-items:baseline;}
+.exp-role{font-size:9.5pt;font-weight:800;color:#0f172a;}
+.exp-date{font-size:7pt;font-weight:700;color:#2563eb;white-space:nowrap;}
+.exp-co{font-size:7.5pt;color:#64748b;margin-bottom:2px;}
+.exp ul{margin-left:14px;margin-top:2px;}
+.exp li{font-size:8pt;color:#334155;margin-bottom:1.5px;line-height:1.4;}
+.exp li b{color:#0f172a;}
+.exp li::marker{color:#2563eb;}
+
+/* PROJECTS */
+.proj{margin-bottom:7px;padding-bottom:5px;border-bottom:1px dashed #e2e8f0;}
+.proj:last-child{border-bottom:none;padding-bottom:0;}
+.proj-top{display:flex;justify-content:space-between;align-items:baseline;gap:4px;}
+.proj-name{font-size:9pt;font-weight:800;color:#0f172a;}
+.proj-right{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.proj-tags{font-size:6.5pt;color:#94a3b8;font-weight:500;}
+.proj-link{font-size:6.5pt;color:#2563eb;font-weight:700;text-decoration:none;border:1px solid #2563eb;padding:1px 5px;border-radius:3px;}
+.proj-desc{font-size:8pt;color:#475569;margin:1px 0;}
+.proj-meta{font-size:7pt;color:#64748b;margin-top:1px;}
+.proj-meta b{color:#334155;font-weight:700;}
+
+/* EDUCATION */
+.edu-top{display:flex;justify-content:space-between;align-items:baseline;}
+.edu-deg{font-size:9pt;font-weight:800;color:#0f172a;}
+.edu-year{font-size:7pt;font-weight:700;color:#2563eb;}
+.edu-inst{font-size:7.5pt;color:#64748b;}
+
+/* FOOTER */
+.foot{margin-top:8px;padding-top:6px;border-top:1px solid #e2e8f0;text-align:center;font-size:6pt;color:#cbd5e1;letter-spacing:1px;text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="hdr">
+   <h1>${DATA.personal.name}</h1>
+   <div class="subtitle">Full Stack Developer — Next.js & MERN Specialist</div>
+   <div class="contact">
+      <span>${DATA.personal.email}</span><span class="sep">•</span>
+      <span>${DATA.personal.location}</span><span class="sep">•</span>
+      <span>8200834970</span><span class="sep">•</span>
+      <a href="https://linkedin.com/in/love-ghariwala-66477133a">linkedin.com/in/love-ghariwala</a><span class="sep">•</span>
+      <a href="https://github.com/loveghariwala">github.com/loveghariwala</a>
+   </div>
+</div>
+
+<div class="sec">
+   <div class="sec-title">Professional Summary</div>
+   <p style="font-size:8pt;color:#334155;">Results-driven Full Stack Developer with production experience building high-performance web applications using <b>JavaScript, TypeScript, Next.js, React.js, Node.js, Supabase, PostgreSQL, and MongoDB</b>. Skilled in RESTful API development, database architecture, responsive UI implementation, and <b>SEO optimization</b>. Consistently delivers clean, scalable code with a focus on performance, accessibility, and user experience.</p>
+</div>
+
+<div class="sec">
+   <div class="sec-title">Technical Skills</div>
+   <div class="skills-row">
+      ${['JavaScript', 'TypeScript', 'Next.js', 'React.js', 'Node.js', 'Express.js', 'MongoDB', 'PostgreSQL', 'Supabase', 'HTML5', 'CSS3', 'Tailwind CSS', 'REST APIs', 'Git', 'GitHub', 'MERN Stack', 'Responsive Design', 'SEO', 'Framer Motion', 'Vercel'].map(s => `<span class="skill">${s}</span>`).join('')}
+   </div>
+</div>
+
+<div class="sec">
+   <div class="sec-title">Work Experience</div>
+   <div class="exp">
+      <div class="exp-top">
+         <span class="exp-role">Full Stack Developer Intern</span>
+         <span class="exp-date">SEP 2025 — PRESENT</span>
+      </div>
+      <div class="exp-co">DivTech System · Surat, Gujarat, India</div>
+      <ul>
+         <li><b>Architected</b> and deployed 3+ production web applications using <b>Next.js, Supabase, TypeScript, and PostgreSQL</b>, handling end-to-end development from database schema design to UI implementation.</li>
+         <li><b>Engineered</b> RESTful API endpoints and optimized complex database queries, reducing response times and ensuring seamless integration of payment gateways and real-time inventory systems.</li>
+         <li><b>Implemented</b> SEO best practices including sitemap generation, meta tag optimization, and structured data, increasing organic search visibility across deployed projects.</li>
+      </ul>
+   </div>
+   <div class="exp">
+      <div class="exp-top">
+         <span class="exp-role">Web Development Intern</span>
+         <span class="exp-date">MAR 2025 — MAY 2025</span>
+      </div>
+      <div class="exp-co">iTact Solutions · Surat, Gujarat, India</div>
+      <ul>
+         <li><b>Developed</b> full-stack applications using the <b>MERN Stack</b> (MongoDB, Express.js, React.js, Node.js), contributing to internal and client-facing production projects.</li>
+         <li><b>Collaborated</b> with cross-functional teams to deliver responsive, accessible web interfaces meeting business requirements.</li>
+      </ul>
+   </div>
+</div>
+
+<div class="sec">
+   <div class="sec-title">Key Projects</div>
+   ${DATA.projects.map((p: any) => `
+   <div class="proj">
+      <div class="proj-top">
+         <span class="proj-name">${p.title}</span>
+         <div class="proj-right">
+            <span class="proj-tags">${p.tags.join(' · ')}</span>
+            ${p.link && p.link !== '#' ? `<a class="proj-link" href="${p.link}" target="_blank">LIVE ↗</a>` : ''}
+         </div>
+      </div>
+      <div class="proj-desc">${p.description}</div>
+      ${p.challenges?.length ? `<div class="proj-meta"><b>Challenges:</b> ${p.challenges.join('; ')}.</div>` : ''}
+      ${p.impact ? `<div class="proj-meta"><b>Impact:</b> ${p.impact}</div>` : ''}
+   </div>
+   `).join('')}
+</div>
+
+<div class="sec">
+   <div class="sec-title">Education</div>
+   <div class="edu-top">
+      <span class="edu-deg">Bachelor of Technology in Computer Science & Engineering</span>
+      <span class="edu-year">2021 — 2025</span>
+   </div>
+   <div class="edu-inst">Parul Institute of Technology · Vadodara, Gujarat, India · CGPA: 7.78</div>
+</div>
+
+<div class="foot">Generated from portfolio · Love Ghariwala</div>
+</div>
+</body>
+</html>`;
 
    const handleDownload = (e: React.MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
-      window.print();
+      const w = window.open('', '_blank', 'width=900,height=700');
+      if (!w) { alert('Please allow popups to download PDF.'); return; }
+      w.document.write(generateResumeHTML());
+      w.document.close();
+      setTimeout(() => { w.focus(); w.print(); }, 400);
    };
 
-   // Gather all skills into a single flat list
-   const allSkills = DATA.skills.flatMap(cat => cat.items);
+   // Reusable section title for preview
+   const SectionTitle = ({ children }: { children: string }) => (
+      <h2 className="text-[9px] font-extrabold uppercase tracking-[2.5px] pb-1 mb-1.5 flex items-center gap-1.5" style={{ color: '#0f172a', borderBottom: '1.5px solid #e2e8f0' }}>
+         <span className="inline-block w-[3px] h-3 rounded-sm" style={{ backgroundColor: '#2563eb' }} />
+         {children}
+      </h2>
+   );
 
    return (
       <AnimatePresence>
          {isOpen && (
             <>
                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                   onClick={onClose}
                   className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] cursor-zoom-out"
                />
@@ -47,20 +199,16 @@ export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
                   initial={{ opacity: 0, scale: 0.9, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                  className="fixed inset-2 sm:inset-4 md:inset-8 lg:inset-x-32 xl:inset-x-56 bg-white text-zinc-900 z-[201] rounded-[2rem] overflow-hidden shadow-2xl flex flex-col pointer-events-auto"
+                  className="fixed inset-2 sm:inset-4 md:inset-8 lg:inset-x-24 xl:inset-x-44 bg-white text-zinc-900 z-[201] rounded-[2rem] overflow-hidden shadow-2xl flex flex-col pointer-events-auto"
                >
-                  {/* Header / Actions Bar */}
-                  <div className="flex items-center justify-between px-6 md:px-8 py-4 bg-zinc-100 border-b border-zinc-200 shrink-0 no-print">
+                  {/* Top Bar */}
+                  <div className="flex items-center justify-between px-6 md:px-8 py-3 bg-zinc-100 border-b border-zinc-200 shrink-0">
                      <div className="flex items-center gap-3">
                         <FileText className="text-primary" size={20} />
                         <span className="font-bold uppercase tracking-widest text-xs hidden sm:block">Resume Preview</span>
                      </div>
                      <div className="flex items-center gap-2 md:gap-4">
-                        <Button
-                           onClick={handleDownload}
-                           variant="primary"
-                           className="gap-2"
-                        >
+                        <Button onClick={handleDownload} variant="primary" className="gap-2">
                            <Download size={18} /> <span className="hidden sm:block">Download PDF</span>
                         </Button>
                         <button onClick={onClose} className="p-2 bg-white hover:bg-zinc-200 rounded-full transition-colors border border-zinc-200 ml-2">
@@ -69,193 +217,110 @@ export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
                      </div>
                   </div>
 
-                  {/* Resume Content - Scrollable */}
-                  <div className="flex-1 overflow-y-auto bg-white relative min-h-0" id="resume-print-area" ref={resumeRef}>
-                     <style jsx global>{`
-                        @media print {
-                           body * {
-                              visibility: hidden;
-                           }
-                           #resume-print-area, #resume-print-area * {
-                              visibility: visible;
-                           }
-                           #resume-print-area {
-                              position: absolute;
-                              left: 0;
-                              top: 0;
-                              width: 100%;
-                              padding: 0.5in !important;
-                              margin: 0 !important;
-                              color: #000 !important;
-                              background: #fff !important;
-                              font-size: 11pt !important;
-                           }
-                           .no-print {
-                              display: none !important;
-                           }
-                           .resume-header {
-                              background: #1a3c6e !important;
-                              -webkit-print-color-adjust: exact;
-                              print-color-adjust: exact;
-                           }
-                           .resume-section-title {
-                              background: #1a3c6e !important;
-                              color: #fff !important;
-                              -webkit-print-color-adjust: exact;
-                              print-color-adjust: exact;
-                           }
-                        }
-                     `}</style>
+                  {/* Preview */}
+                  <div className="flex-1 overflow-y-auto bg-zinc-300 min-h-0 p-4 md:p-8" ref={resumeRef}>
+                     <div className="max-w-[850px] mx-auto bg-white shadow-2xl px-6 md:px-8 py-5" style={{ fontFamily: "'Inter', 'Segoe UI', sans-serif" }}>
 
-                     <div className="max-w-[800px] mx-auto bg-white" style={{ fontFamily: "'Times New Roman', Georgia, serif" }}>
-                        
-                        {/* ====== HEADER ====== */}
-                        <div className="resume-header text-center py-5 px-6" style={{ backgroundColor: '#1a3c6e', color: '#fff' }}>
-                           <h1 className="text-3xl md:text-4xl font-bold tracking-wide" style={{ fontFamily: "'Times New Roman', Georgia, serif", marginBottom: '4px' }}>
-                              {DATA.personal.name}
-                           </h1>
-                           <p className="text-xs md:text-sm opacity-90 mt-1" style={{ letterSpacing: '0.5px' }}>
-                              ✉ {DATA.personal.location} ✉ {DATA.personal.email} ☎ 8200834970 ☐ in/love-ghariwala-66477133a
+                        {/* HEADER */}
+                        <div className="text-center pb-3 mb-3" style={{ borderBottom: '2.5px solid #0f172a' }}>
+                           <h1 className="text-3xl md:text-4xl font-black tracking-tight next-gen-gradient" style={{ lineHeight: 1 }}>{DATA.personal.name}</h1>
+                           <p className="text-[9px] md:text-[10px] font-black uppercase tracking-[2px] mt-1 next-gen-gradient">Full Stack Developer — Next.js & MERN Specialist</p>
+                           <div className="flex justify-center flex-wrap gap-1.5 mt-2 text-[9px]" style={{ color: '#64748b' }}>
+                              <span>{DATA.personal.email}</span>
+                              <span style={{ color: '#cbd5e1' }}>•</span>
+                              <span>{DATA.personal.location}</span>
+                              <span style={{ color: '#cbd5e1' }}>•</span>
+                              <span>8200834970</span>
+                              <span style={{ color: '#cbd5e1' }}>•</span>
+                              <a href="https://linkedin.com/in/love-ghariwala-66477133a" target="_blank" className="font-semibold" style={{ color: '#2563eb' }}>LinkedIn</a>
+                              <span style={{ color: '#cbd5e1' }}>•</span>
+                              <a href="https://github.com/loveghariwala" target="_blank" className="font-semibold" style={{ color: '#2563eb' }}>GitHub</a>
+                           </div>
+                        </div>
+
+                        {/* SUMMARY */}
+                        <div className="mb-2.5">
+                           <SectionTitle>Professional Summary</SectionTitle>
+                           <p className="text-[10px] leading-[1.45]" style={{ color: '#334155' }}>
+                              Results-driven Full Stack Developer with production experience building high-performance web applications using <b>JavaScript, TypeScript, Next.js, React.js, Node.js, Supabase, PostgreSQL, and MongoDB</b>. Skilled in RESTful API development, database architecture, responsive UI implementation, and <b>SEO optimization</b>. Consistently delivers clean, scalable code with a focus on performance, accessibility, and user experience.
                            </p>
                         </div>
 
-                        {/* ====== BODY ====== */}
-                        <div className="px-6 md:px-10 py-6 space-y-5 text-[13px] md:text-sm leading-relaxed text-zinc-800" style={{ fontFamily: "'Times New Roman', Georgia, serif" }}>
+                        {/* SKILLS */}
+                        <div className="mb-2.5">
+                           <SectionTitle>Technical Skills</SectionTitle>
+                           <div className="flex flex-wrap gap-1">
+                              {['JavaScript', 'TypeScript', 'Next.js', 'React.js', 'Node.js', 'Express.js', 'MongoDB', 'PostgreSQL', 'Supabase', 'HTML5', 'CSS3', 'Tailwind CSS', 'REST APIs', 'Git', 'GitHub', 'MERN Stack', 'Responsive Design', 'SEO', 'Framer Motion', 'Vercel'].map(s => (
+                                 <span key={s} className="text-[7.5px] font-semibold px-2 py-0.5 rounded-full border" style={{ color: '#2563eb', borderColor: '#2563eb', backgroundColor: '#eff6ff' }}>{s}</span>
+                              ))}
+                           </div>
+                        </div>
 
-                           {/* --- SUMMARY --- */}
-                           <section>
-                              <h2 className="resume-section-title font-bold text-sm md:text-base px-3 py-1.5 mb-3" style={{ backgroundColor: '#1a3c6e', color: '#fff', letterSpacing: '1px' }}>
-                                 SUMMARY
-                              </h2>
-                              <p className="leading-relaxed text-zinc-700 px-1">
-                                 Motivated and detail-oriented Software Developer with experience in both frontend and backend development. Skilled in building modern web applications using technologies such as JavaScript, Next.js, MERN Stack, Supabase, TypeScript, and PostgreSQL. Experienced in developing APIs, managing databases, and implementing core features for real-world applications with <b>GIT</b>.
-                              </p>
-                              <p className="leading-relaxed text-zinc-700 px-1 mt-2">
-                                 I enjoy working on practical projects where I can solve real problems and improve my development skills. During my work on different projects, I have gained hands-on experience in building scalable features, handling database operations, and adapting to changing project requirements. I am always eager to learn new technologies, improve my problem-solving abilities, and grow as a full-stack developer while contributing to meaningful software products.
-                              </p>
-                           </section>
+                        {/* EXPERIENCE */}
+                        <div className="mb-2.5">
+                           <SectionTitle>Work Experience</SectionTitle>
 
-                           {/* --- EXPERIENCE --- */}
-                           <section>
-                              <h2 className="resume-section-title font-bold text-sm md:text-base px-3 py-1.5 mb-3" style={{ backgroundColor: '#1a3c6e', color: '#fff', letterSpacing: '1px' }}>
-                                 EXPERIENCE
-                              </h2>
-
-                              {/* DivTech */}
-                              <div className="px-1 mb-4">
-                                 <div className="flex items-start justify-between flex-wrap gap-1">
-                                    <div>
-                                       <h3 className="font-bold text-base text-zinc-900">Front-end & Back-end Developer (Intern)</h3>
-                                       <p className="text-zinc-600 text-[13px]">DivTech System</p>
-                                    </div>
-                                    <p className="text-zinc-600 text-[13px] font-semibold whitespace-nowrap">September 2025 - Present, India</p>
-                                 </div>
-                                 <ul className="list-disc ml-5 mt-2 space-y-1 text-zinc-700">
-                                    <li>Developed full-stack web applications using <b>Next.js, Supabase, TypeScript, and PostgreSQL</b>, contributing to both frontend and backend across multiple projects.</li>
-                                    <li>Built and optimized APIs, managed database operations, and implemented SEO best practices for production-ready applications.</li>
-                                 </ul>
+                           <div className="mb-2">
+                              <div className="flex justify-between items-baseline">
+                                 <h3 className="font-extrabold text-[11px]" style={{ color: '#0f172a' }}>Full Stack Developer Intern</h3>
+                                 <span className="text-[8px] font-bold" style={{ color: '#2563eb' }}>SEP 2025 — PRESENT</span>
                               </div>
+                              <p className="text-[8px]" style={{ color: '#64748b' }}>DivTech System · Surat, Gujarat, India</p>
+                              <ul className="list-disc ml-4 mt-0.5 text-[9px] space-y-0.5" style={{ color: '#334155' }}>
+                                 <li><b>Architected</b> and deployed 3+ production web apps using <b>Next.js, Supabase, TypeScript & PostgreSQL</b>, handling end-to-end development.</li>
+                                 <li><b>Engineered</b> RESTful APIs and optimized complex database queries, ensuring seamless payment gateway integration.</li>
+                                 <li><b>Implemented</b> SEO best practices including sitemap generation, meta tag optimization, and structured data.</li>
+                              </ul>
+                           </div>
 
-                              {/* iTact Solutions */}
-                              <div className="px-1 mb-3">
-                                 <div className="flex items-start justify-between flex-wrap gap-1">
-                                    <div>
-                                       <h3 className="font-bold text-base text-zinc-900">Web Development Intern</h3>
-                                       <p className="text-zinc-600 text-[13px]">iTact Solutions</p>
-                                    </div>
-                                    <p className="text-zinc-600 text-[13px] font-semibold whitespace-nowrap">March 2025 - May 2025, Surat</p>
-                                 </div>
-                                 <ul className="list-disc ml-5 mt-2 space-y-1 text-zinc-700">
-                                    <li>Worked as a <b>MERN Stack</b> developer, building full-stack applications and contributing to internal and client-facing web projects.</li>
-                                    <li>Gained hands-on experience with MongoDB, Express.js, React.js, and Node.js in a production environment.</li>
-                                 </ul>
+                           <div className="mb-1">
+                              <div className="flex justify-between items-baseline">
+                                 <h3 className="font-extrabold text-[11px]" style={{ color: '#0f172a' }}>Web Development Intern</h3>
+                                 <span className="text-[8px] font-bold" style={{ color: '#2563eb' }}>MAR 2025 — MAY 2025</span>
                               </div>
-                           </section>
+                              <p className="text-[8px]" style={{ color: '#64748b' }}>iTact Solutions · Surat, Gujarat, India</p>
+                              <ul className="list-disc ml-4 mt-0.5 text-[9px]" style={{ color: '#334155' }}>
+                                 <li><b>Developed</b> full-stack applications using the <b>MERN Stack</b> for internal and client-facing production projects.</li>
+                                 <li><b>Collaborated</b> with cross-functional teams to deliver responsive, accessible web interfaces.</li>
+                              </ul>
+                           </div>
+                        </div>
 
-                           {/* --- KEY PROJECTS --- */}
-                           <section>
-                              <h2 className="resume-section-title font-bold text-sm md:text-base px-3 py-1.5 mb-3" style={{ backgroundColor: '#1a3c6e', color: '#fff', letterSpacing: '1px' }}>
-                                 KEY PROJECTS
-                              </h2>
-
-                              {DATA.projects.map((project: any, i: number) => (
-                                 <div key={i} className="px-1 mb-5">
-                                    <div className="flex items-start justify-between flex-wrap gap-1">
-                                       <div>
-                                          <h3 className="font-bold text-base text-zinc-900">{project.title}</h3>
-                                          <p className="text-zinc-500 text-[12px]">{project.tags.join(' • ')}</p>
-                                       </div>
+                        {/* PROJECTS */}
+                        <div className="mb-2.5">
+                           <SectionTitle>Key Projects</SectionTitle>
+                           {DATA.projects.map((project: any, i: number) => (
+                              <div key={i} className="mb-2 pb-1.5" style={{ borderBottom: i < DATA.projects.length - 1 ? '1px dashed #e2e8f0' : 'none' }}>
+                                 <div className="flex justify-between items-baseline flex-wrap gap-x-2">
+                                    <h3 className="font-extrabold text-[10px]" style={{ color: '#0f172a' }}>{project.title}</h3>
+                                    <div className="flex items-center gap-1.5">
+                                       <span className="text-[7px]" style={{ color: '#94a3b8' }}>{project.tags.join(' · ')}</span>
                                        {project.link && project.link !== '#' && (
-                                          <a 
-                                             href={project.link} 
-                                             target="_blank" 
-                                             rel="noopener noreferrer"
-                                             className="text-[12px] font-bold uppercase tracking-wider"
-                                             style={{ color: '#1a3c6e', textDecoration: 'underline' }}
-                                          >
-                                             View Live ↗
-                                          </a>
+                                          <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-[7px] font-bold px-1.5 py-px rounded border" style={{ color: '#2563eb', borderColor: '#2563eb', textDecoration: 'none' }}>LIVE ↗</a>
                                        )}
                                     </div>
-
-                                    <p className="text-zinc-700 mt-1.5 leading-relaxed">{project.description}</p>
-
-                                    {/* Hurdles */}
-                                    {project.challenges && project.challenges.length > 0 && (
-                                       <div className="mt-2">
-                                          <p className="font-bold text-[12px] text-zinc-800">‣ Hurdles Overcome:</p>
-                                          <ul className="list-disc ml-5 mt-1 space-y-1 text-zinc-700">
-                                             {project.challenges.map((ch: string, idx: number) => (
-                                                <li key={idx}>{ch}</li>
-                                             ))}
-                                          </ul>
-                                       </div>
-                                    )}
-
-                                    {/* Success & Impact */}
-                                    {(project.impact || (project.learnings && project.learnings.length > 0)) && (
-                                       <div className="mt-2">
-                                          <p className="font-bold text-[12px] text-zinc-800">‣ Success & Impact:</p>
-                                          {project.impact && (
-                                             <p className="ml-5 text-zinc-700 mt-0.5">{project.impact}</p>
-                                          )}
-                                          {project.learnings && project.learnings.length > 0 && (
-                                             <ul className="list-disc ml-5 mt-1 space-y-1 text-zinc-700">
-                                                {project.learnings.map((l: string, idx: number) => (
-                                                   <li key={idx}>{l}</li>
-                                                ))}
-                                             </ul>
-                                          )}
-                                       </div>
-                                    )}
                                  </div>
-                              ))}
-                           </section>
-
-                           {/* --- EDUCATION --- */}
-                           <section>
-                              <h2 className="resume-section-title font-bold text-sm md:text-base px-3 py-1.5 mb-3" style={{ backgroundColor: '#1a3c6e', color: '#fff', letterSpacing: '1px' }}>
-                                 EDUCATION
-                              </h2>
-                              <div className="px-1">
-                                 <h3 className="font-bold text-base text-zinc-900">Bachelor of Technology in Computer Science and Engineering</h3>
-                                 <p className="text-zinc-600 text-[13px]">
-                                    Parul Institute of Technology · Vadodara, Gujarat, India · 2025 · 7.78
-                                 </p>
+                                 <p className="text-[9px] mt-0.5" style={{ color: '#475569' }}>{project.description}</p>
+                                 {project.challenges?.length > 0 && (
+                                    <p className="text-[8px] mt-0.5" style={{ color: '#64748b' }}><b style={{ color: '#334155' }}>Challenges:</b> {project.challenges.join('; ')}.</p>
+                                 )}
+                                 {project.impact && (
+                                    <p className="text-[8px] mt-0.5" style={{ color: '#64748b' }}><b style={{ color: '#334155' }}>Impact:</b> {project.impact}</p>
+                                 )}
                               </div>
-                           </section>
-
-                           {/* --- SKILLS --- */}
-                           <section>
-                              <h2 className="resume-section-title font-bold text-sm md:text-base px-3 py-1.5 mb-3" style={{ backgroundColor: '#1a3c6e', color: '#fff', letterSpacing: '1px' }}>
-                                 SKILLS
-                              </h2>
-                              <p className="px-1 text-zinc-700">
-                                 HTML, CSS, JavaScript, MERN Stack, Next.js, Supabase, TypeScript, C++, GIT, {allSkills.filter(s => !['JavaScript', 'Next.js', 'TypeScript'].includes(s)).join(', ')}
-                              </p>
-                           </section>
-
+                           ))}
                         </div>
+
+                        {/* EDUCATION */}
+                        <div>
+                           <SectionTitle>Education</SectionTitle>
+                           <div className="flex justify-between items-baseline">
+                              <h3 className="font-extrabold text-[10px]" style={{ color: '#0f172a' }}>Bachelor of Technology in Computer Science & Engineering</h3>
+                              <span className="text-[8px] font-bold" style={{ color: '#2563eb' }}>2021 — 2025</span>
+                           </div>
+                           <p className="text-[8px]" style={{ color: '#64748b' }}>Parul Institute of Technology · Vadodara, Gujarat · CGPA: 7.78</p>
+                        </div>
+
                      </div>
                   </div>
                </motion.div>

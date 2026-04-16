@@ -11,20 +11,27 @@ export async function POST(req: Request) {
       });
     }
 
-    // NOTE: In a real production environment, you would use environment variables (process.env.EMAIL_USER, etc.)
-    // For this demonstration, we setup a transporter. 
-    // IMPORTANT: To make this work with Gmail, you would need to use an "App Password".
+    const isEmailConfigured = process.env.EMAIL_USER && process.env.EMAIL_PASS;
+
+    if (!isEmailConfigured) {
+      // Fallback for development if .env is not loaded or missing
+      return new Response(JSON.stringify({ error: "Email service not configured. Please add EMAIL_USER and EMAIL_PASS to .env" }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_USER || "your-email@gmail.com",
-        pass: process.env.EMAIL_PASS || "your-app-password",
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
     const mailOptions = {
       from: email,
-      to: "llghariwala@gmail.com",
+      to: process.env.EMAIL_USER,
       subject: `New Portfolio Message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       html: `

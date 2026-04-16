@@ -62,7 +62,7 @@ export const DATA = {
     },
     {
       slug: "shreeji-sewing-machine",
-      title: "Sreeji Sewing Machine",
+      title: "Shreeji Sewing Machine",
       description: "Product-based website with detailed UI, animations, backend APIs, and SEO optimization.",
       image: "/sewing/Screenshot from 2026-04-16 15-14-46.png",
       screenshots: [
