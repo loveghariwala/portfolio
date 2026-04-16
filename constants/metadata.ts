@@ -2,20 +2,20 @@ import { Metadata } from 'next';
 
 export const siteMetadata: Metadata = {
   title: {
-    template: '%s | Alex Rivera Portfolio',
-    default: 'Alex Rivera - Senior Full Stack Developer',
+    template: '%s | Love Ghariwala Portfolio',
+    default: 'Love Ghariwala -  Full Stack Developer',
   },
-  description: 'High-end personal portfolio of Alex Rivera, focusing on premium UI/UX, performance, and scalability.',
+  description: 'High-end personal portfolio of Love Ghariwala, focusing on premium UI/UX, performance, and scalability.',
   keywords: ['Portfolio', 'Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Full Stack Developer'],
-  authors: [{ name: 'Alex Rivera' }],
+  authors: [{ name: 'Love Ghariwala' }],
   openGraph: {
-    title: 'Alex Rivera - Senior Full Stack Developer',
-    description: 'High-end personal portfolio of Alex Rivera.',
-    url: 'https://alexrivera.dev',
-    siteName: 'Alex Rivera Portfolio',
+    title: 'Love Ghariwala -  Full Stack Developer',
+    description: 'High-end personal portfolio of Love Ghariwala.',
+    url: 'https://Love Ghariwala.dev',
+    siteName: 'Love Ghariwala Portfolio',
     images: [
       {
-        url: 'https://alexrivera.dev/og-image.png',
+        url: 'https://Love Ghariwala.dev/og-image.png',
         width: 1200,
         height: 630,
       },
@@ -25,10 +25,10 @@ export const siteMetadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Alex Rivera - Senior Full Stack Developer',
-    description: 'High-end personal portfolio of Alex Rivera.',
-    creator: '@alexrivera',
-    images: ['https://alexrivera.dev/twitter-image.png'],
+    title: 'Love Ghariwala - Senior Full Stack Developer',
+    description: 'High-end personal portfolio of Love Ghariwala.',
+    creator: '@Love Ghariwala',
+    images: ['https://Love Ghariwala.dev/twitter-image.png'],
   },
   robots: {
     index: true,
