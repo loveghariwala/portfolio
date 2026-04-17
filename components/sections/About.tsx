@@ -18,7 +18,7 @@ const StatCard = ({ item, index }: { item: any; index: number }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.1 * index, duration: 0.8 }}
+    transition={{ delay: 0.1 * index, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     viewport={{ once: true }}
     className="group glass-card p-6 rounded-[2rem] border border-white/5 hover:border-primary/20 transition-all duration-500"
   >
@@ -147,7 +147,7 @@ export const About = () => {
             <motion.div
               initial={{ opacity: 0, filter: "blur(10px)" }}
               whileInView={{ opacity: 1, filter: "blur(0px)" }}
-              transition={{ duration: 1 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
               className="p-10 rounded-[3rem] bg-primary/5 border border-primary/10 relative overflow-hidden group"
             >

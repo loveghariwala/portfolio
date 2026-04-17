@@ -48,7 +48,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
       ref={cardRef}
       layoutId={`project-${project.slug}`}
       initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }}
       viewport={{ once: true }}
       style={{ y: contentY }}
       transition={{ duration: 0.8, delay: index * 0.1 }}
@@ -75,9 +75,12 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-[2s] group-hover/img:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-[2s] group-hover/img:scale-105"
                 />
+                <div className="absolute inset-0 bg-zinc-950/20 group-hover/img:bg-transparent transition-colors duration-700" />
                 <div className="absolute inset-0 bg-primary/20 mix-blend-overlay opacity-0 group-hover/img:opacity-100 transition-opacity duration-700" />
+                {/* Inner Shadow to integrate bright images */}
+                <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.5)] opacity-40 group-hover/img:opacity-20 transition-opacity" />
              </motion.div>
              
              {/* Custom Cursor for Project */}

@@ -2,13 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { Moon, Sun, Menu, X, Download } from "lucide-react";
+import { Moon, Sun, Menu, X, Download, Globe } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Container } from "./Container";
 import { Button } from "../ui/Button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { ResumeModal } from "@/components/ui/ResumeModal";
 import { DATA } from "@/constants/data";
 
@@ -57,35 +56,35 @@ export const Navbar = () => {
       )}
     >
       <Container className="flex justify-center">
-        <motion.div 
+        <motion.div
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className={cn(
             "pointer-events-auto relative flex items-center gap-8 px-8 py-3 rounded-[2.5rem] transition-all duration-700 border shadow-2xl overflow-hidden",
-            isScrolled 
-              ? "glass border-primary/20 bg-background/40 backdrop-blur-[20px] scale-95" 
+            isScrolled
+              ? "glass border-primary/20 bg-background/40 backdrop-blur-[20px] scale-95"
               : "bg-background/10 backdrop-blur-sm border-white/5"
           )}
         >
           {/* Animated Background Glow */}
           {isScrolled && (
             <div className="absolute inset-0 z-[-1] opacity-20">
-               <div className="absolute top-0 left-1/4 w-1/2 h-full bg-gradient-to-r from-transparent via-primary to-transparent blur-[40px]" />
+              <div className="absolute top-0 left-1/4 w-1/2 h-full bg-gradient-to-r from-transparent via-primary to-transparent blur-[40px]" />
             </div>
           )}
 
           <Link href="/" className="text-xl font-heading font-black tracking-tighter group flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-xs text-white shadow-glow group-hover:rotate-[360deg] transition-all duration-700 overflow-hidden border border-white/10">
-               {DATA.personal.avatar ? (
-                  <img src={DATA.personal.avatar} alt="LG" className="w-full h-full object-cover" />
-               ) : (
-                  "LG"
-               )}
+              {DATA.personal.avatar ? (
+                <img src={DATA.personal.avatar} alt="LG" className="w-full h-full object-cover" />
+              ) : (
+                "LG"
+              )}
             </div>
             <span className="relative z-10 group-hover:text-primary transition-colors duration-300 uppercase">
-               {DATA.personal.name.split(' ')[0]}
-               <span className="text-primary group-hover:text-white transition-colors">.</span>
+              {DATA.personal.name.split(' ')[0]}
+              <span className="text-primary group-hover:text-white transition-colors">.</span>
             </span>
           </Link>
 
@@ -123,30 +122,45 @@ export const Navbar = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-             <Button
-               onClick={() => setIsResumeOpen(true)}
-               variant="primary"
-               className="hidden md:flex h-10 px-6 rounded-xl text-[10px] uppercase font-black tracking-widest gap-2 group/res"
-             >
-                <Download size={14} className="group-hover/res:-translate-y-0.5 transition-transform" /> 
-                Resume
-             </Button>
+            <Button
+              onClick={() => setIsResumeOpen(true)}
+              variant="primary"
+              className="hidden md:flex h-10 px-6 rounded-xl text-[10px] uppercase font-black tracking-widest gap-2 group/res"
+            >
+              <Download size={14} className="group-hover/res:-translate-y-0.5 transition-transform" />
+              Resume
+            </Button>
 
-             <motion.button
-               whileHover={{ scale: 1.1, rotate: 180 }}
-               whileTap={{ scale: 0.9 }}
-               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-               className="p-2 rounded-xl hover:text-primary transition-colors text-foreground/60"
-             >
-               {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-             </motion.button>
+            <div className="hidden lg:flex items-center gap-2">
+              {DATA.social.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-xl hover:bg-white/10 hover:text-primary transition-all text-foreground/60"
+                  title={item.name}
+                >
+                  {item.name === "GitHub" ? <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.28 1.15-.28 2.35 0 3.5-.73 1.02-1.08 2.25-1 3.5 0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></svg> : <Globe size={18} />}
+                </a>
+              ))}
+            </div>
 
-             <button
-               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-               className="md:hidden p-2 text-foreground/60"
-             >
-               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-             </button>
+            <motion.button
+              whileHover={{ scale: 1.1, rotate: 180 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-xl hover:text-primary transition-colors text-foreground/60"
+            >
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            </motion.button>
+
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 text-foreground/60"
+            >
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </motion.div>
       </Container>

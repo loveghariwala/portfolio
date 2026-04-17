@@ -13,13 +13,13 @@ const stagger = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
   },
 };
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as any } },
 };
 
 export const Hero = () => {
@@ -101,7 +101,7 @@ export const Hero = () => {
               <a href="#projects" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto h-16 px-10 rounded-2xl text-lg font-bold group relative overflow-hidden shadow-glow">
                   <span className="relative z-10 flex items-center gap-3">
-                    View My Portflio <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                    View My Projects <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                   </span>
                 </Button>
               </a>
@@ -129,7 +129,7 @@ export const Hero = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] as any }}
             className="relative hidden lg:block"
           >
             {/* Decorative Background for Image */}
@@ -150,25 +150,25 @@ export const Hero = () => {
                 <div className="absolute inset-0 bg-zinc-900 group">
                   <div className="absolute inset-0 dot-grid opacity-20 z-10" />
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-accent/30 mix-blend-overlay z-10" />
-                  
+
                   {DATA.personal.avatar ? (
-                     <motion.img 
-                        initial={{ scale: 1.2, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                        src={DATA.personal.avatar} 
-                        alt={DATA.personal.name}
-                        className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
-                     />
+                    <motion.img
+                      initial={{ scale: 1.2, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] as any }}
+                      src={DATA.personal.avatar}
+                      alt={DATA.personal.name}
+                      className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+                    />
                   ) : (
-                     <div className="w-full h-full flex items-center justify-center">
-                        <span className="text-8xl font-black font-heading text-white/10 uppercase">LG.</span>
-                     </div>
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-8xl font-black font-heading text-white/10 uppercase">LG.</span>
+                    </div>
                   )}
-                  
+
                   {/* Generative UI Overlay Elements */}
                   <div className="absolute top-10 left-10 p-4 glass rounded-2xl border border-white/20 animate-float z-20">
-                     <div className="flex gap-2">
+                    <div className="flex gap-2">
                       <div className="w-2 h-2 rounded-full bg-red-500" />
                       <div className="w-2 h-2 rounded-full bg-yellow-500" />
                       <div className="w-2 h-2 rounded-full bg-green-500" />

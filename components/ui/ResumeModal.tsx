@@ -196,30 +196,46 @@ body{font-family:'Inter',sans-serif;color:#1e293b;background:#fff;font-size:8.5p
                   className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] cursor-zoom-out"
                />
                <motion.div
-                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  initial={{ opacity: 0, scale: 0.9, y: 30 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                  className="fixed inset-2 sm:inset-4 md:inset-8 lg:inset-x-24 xl:inset-x-44 bg-white text-zinc-900 z-[201] rounded-[2rem] overflow-hidden shadow-2xl flex flex-col pointer-events-auto"
+                  exit={{ opacity: 0, scale: 0.9, y: 30 }}
+                  transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                  className="fixed inset-2 sm:inset-4 md:inset-8 lg:inset-x-24 xl:inset-x-44 bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 z-[201] rounded-[2.5rem] overflow-hidden shadow-3xl flex flex-col pointer-events-auto border border-white/10"
                >
                   {/* Top Bar */}
-                  <div className="flex items-center justify-between px-6 md:px-8 py-3 bg-zinc-100 border-b border-zinc-200 shrink-0">
-                     <div className="flex items-center gap-3">
-                        <FileText className="text-primary" size={20} />
-                        <span className="font-bold uppercase tracking-widest text-xs hidden sm:block">Resume Preview</span>
+                  <div className="flex items-center justify-between px-6 md:px-10 py-5 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-md border-b border-zinc-200 dark:border-white/5 shrink-0">
+                     <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+                           <FileText size={20} />
+                        </div>
+                        <div className="flex flex-col">
+                           <span className="font-black uppercase tracking-widest text-[10px] text-primary">Resume</span>
+                           <span className="font-bold text-sm hidden sm:block">Professional Preview</span>
+                        </div>
                      </div>
-                     <div className="flex items-center gap-2 md:gap-4">
-                        <Button onClick={handleDownload} variant="primary" className="gap-2">
+                     <div className="flex items-center gap-3 md:gap-4">
+                        <Button onClick={handleDownload} variant="primary" className="gap-2 h-11 px-6 rounded-xl shadow-glow">
                            <Download size={18} /> <span className="hidden sm:block">Download PDF</span>
                         </Button>
-                        <button onClick={onClose} className="p-2 bg-white hover:bg-zinc-200 rounded-full transition-colors border border-zinc-200 ml-2">
+                        <button 
+                           onClick={onClose} 
+                           className="w-11 h-11 flex items-center justify-center bg-zinc-100 dark:bg-white/5 hover:bg-zinc-200 dark:hover:bg-white/10 rounded-xl transition-all border border-zinc-200 dark:border-white/10"
+                        >
                            <X size={20} />
                         </button>
                      </div>
                   </div>
 
                   {/* Preview */}
-                  <div className="flex-1 overflow-y-auto bg-zinc-300 min-h-0 p-4 md:p-8" ref={resumeRef}>
-                     <div className="max-w-[850px] mx-auto bg-white shadow-2xl px-6 md:px-8 py-5" style={{ fontFamily: "'Inter', 'Segoe UI', sans-serif" }}>
+                  <div className="flex-1 overflow-y-auto bg-zinc-200 dark:bg-zinc-900/50 min-h-0 p-4 md:p-12" ref={resumeRef}>
+                     <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="max-w-[850px] mx-auto bg-white shadow-[0_20px_70px_-10px_rgba(0,0,0,0.3)] px-8 md:px-12 py-10 rounded-sm relative overflow-hidden" 
+                        style={{ fontFamily: "'Inter', 'Segoe UI', sans-serif" }}
+                     >
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-primary" />
 
                         {/* HEADER */}
                         <div className="text-center pb-3 mb-3" style={{ borderBottom: '2.5px solid #0f172a' }}>
@@ -321,9 +337,9 @@ body{font-family:'Inter',sans-serif;color:#1e293b;background:#fff;font-size:8.5p
                            <p className="text-[8px]" style={{ color: '#64748b' }}>Parul Institute of Technology · Vadodara, Gujarat · CGPA: 7.78</p>
                         </div>
 
-                     </div>
-                  </div>
-               </motion.div>
+                      </motion.div>
+                   </div>
+                </motion.div>
             </>
          )}
       </AnimatePresence>

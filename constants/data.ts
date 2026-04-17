@@ -30,8 +30,8 @@ export const DATA = {
     {
       slug: "babyowl-ecommerce",
       title: "BabyOwl E-commerce",
-      description: "Full-scale e-commerce platform with authentication, product variants, cart, payments, and shipment integration.",
-      image: "/babyowl/Screenshot from 2026-04-16 15-19-27.png",
+      description: "Premium eyewear platform utilizing a glassmorphism design system. Features a yellow & white high-end aesthetic with advanced lens filtering.",
+      image: "/babyowl/1.png",
       screenshots: [
         "/babyowl/Screenshot from 2026-04-16 15-18-34.png",
         "/babyowl/Screenshot from 2026-04-16 15-19-27.png",
@@ -111,9 +111,9 @@ export const DATA = {
       slug: "personal-portfolio",
       title: "Personal Portfolio",
       description: "Modern portfolio built with App Router, focusing on clean architecture and high-end animations.",
-      image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop",
+      image: "/projects/portfolio-hero.png",
       tags: ["Next.js", "TypeScript", "Framer Motion", "Tailwind"],
-      link: "#",
+      link: "https://loveportfolio.vercel.app/",
       github: "https://github.com/loveghariwala",
       challenges: [
         "Designing scalable component architecture",
