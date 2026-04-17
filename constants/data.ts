@@ -23,7 +23,7 @@ export const DATA = {
     },
     {
       category: "Design",
-      items: ["Tailwind CSS", "Responsive Design", "UI/UX Implementation", "Framer Motion"]
+      items: ["Tailwind CSS", "Responsive Design", "UI/UX Implementation",]
     },
   ],
   projects: [
@@ -111,7 +111,10 @@ export const DATA = {
       slug: "personal-portfolio",
       title: "Personal Portfolio",
       description: "Modern portfolio built with App Router, focusing on clean architecture and high-end animations.",
-      image: "/projects/portfolio-hero.png",
+      image: "/profile/2.png",
+      screenshots: [
+       "/profile/2.png",
+      ],
       tags: ["Next.js", "TypeScript", "Framer Motion", "Tailwind"],
       link: "https://loveportfolio.vercel.app/",
       github: "https://github.com/loveghariwala",
