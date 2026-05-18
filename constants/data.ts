@@ -28,6 +28,36 @@ export const DATA = {
   ],
   projects: [
     {
+      slug: "neocinematv",
+      title: "NeoCinemaTV",
+      description: "A premium, ad-free cinema streaming platform and intelligent AI discovery system. Integrates Next.js and FastAPI to deliver server-side rendered pages, a custom-sandboxed media streaming engine, and a semantic search engine powered by Hugging Face sentence-transformers and Qdrant vector databases.",
+      image: "/neomovies/Screenshot from 2026-05-18 16-07-34.png",
+      screenshots: [
+        "/neomovies/Screenshot from 2026-05-18 16-07-34.png",
+        "/neomovies/screencapture-neocinematv-dh7c9m5rq-loveghariwalas-projects-vercel-app-2026-05-18-16_12_58.png",
+        "/neomovies/screencapture-neocinematv-vercel-app-movies-2026-05-18-16_04_29.png",
+        "/neomovies/screencapture-neocinematv-vercel-app-search-2026-05-18-16_05_32.png",
+        "/neomovies/screencapture-neocinematv-vercel-app-series-124364-2026-05-18-16_04_59.png",
+        "/neomovies/screencapture-neocinematv-vercel-app-series-2026-05-18-16_04_11.png"
+      ],
+      tags: ["Next.js", "FastAPI", "MongoDB", "Tailwind", "Hugging Face", "Qdrant"],
+      link: "https://neocinematv.vercel.app/",
+      github: "https://github.com/loveghariwala/neocinema",
+      challenges: [
+        "Securing HTML5 sandboxed iframes to block popup redirect ads.",
+        "Bypassing server sandbox-detection blocks using stream fallovers.",
+        "Developing secure FastAPI proxy routes to hide TMDB API keys.",
+        "Implementing MongoDB aggregators as failover database solutions."
+      ],
+      learnings: [
+        "Generating 384-dimensional theme vector embeddings using Hugging Face.",
+        "Applying Qdrant similarity searches to fetch matches under 50ms.",
+        "Hardening iframe security models and custom CORS credentials.",
+        "Building ultra-fast JSON endpoints using FastAPI router schemas."
+      ],
+      impact: "Launched a state-of-the-art cinema platform featuring a zero-ad media environment and a dynamic, sub-50ms semantic recommendations grid with a 100% responsive fluid UI."
+    },
+    {
       slug: "babyowl-ecommerce",
       title: "BabyOwl E-commerce",
       description: "Premium eyewear platform utilizing a glassmorphism design system. Features a yellow & white high-end aesthetic with advanced lens filtering.",
@@ -113,7 +143,7 @@ export const DATA = {
       description: "Modern portfolio built with App Router, focusing on clean architecture and high-end animations.",
       image: "/profile/2.png",
       screenshots: [
-       "/profile/2.png",
+        "/profile/2.png",
       ],
       tags: ["Next.js", "TypeScript", "Framer Motion", "Tailwind"],
       link: "https://loveportfolio.vercel.app/",

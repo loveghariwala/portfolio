@@ -108,7 +108,7 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
                       </div>
                    </div>
 
-                   <h1 className="text-[10vw] md:text-[14vw] font-black font-heading leading-[0.8] tracking-tighter mb-16 text-white text-shadow-xl">
+                   <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black font-heading leading-[0.95] tracking-tighter mb-16 text-white text-shadow-xl break-words max-w-full">
                       {project.title.split(" ").map((word: string, i: number) => (
                          <span key={i} className="block first:gradient-text last:text-white uppercase drop-shadow-2xl">{word}</span>
                       ))}
