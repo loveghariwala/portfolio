@@ -3,16 +3,39 @@
 import { useState } from "react";
 import { Container } from "@/components/layout/Container";
 import { DATA } from "@/constants/data";
-import { Send, Mail, MapPin, Check } from "lucide-react";
+import { Send, Mail, MapPin, Check, Loader2 } from "lucide-react";
 
 export const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 3000);
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setSent(true);
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        // Fallback to mailto link if EMAIL_USER / EMAIL_PASS environment variables are not configured in Vercel
+        window.location.href = `mailto:${DATA.personal.email}?subject=Portfolio Contact from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}`;
+        setSent(true);
+      }
+    } catch (err) {
+      window.location.href = `mailto:${DATA.personal.email}?subject=Portfolio Contact from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}`;
+      setSent(true);
+    } finally {
+      setLoading(false);
+      setTimeout(() => setSent(false), 4000);
+    }
   };
 
   return (
@@ -60,11 +83,11 @@ export const Contact = () => {
             </div>
           </div>
 
-          {/* RIGHT: CONTACT FORM (7 Cols) */}
+          {/* RIGHT: CONTACT FORM (NODEMAILER INTEGRATED) (7 Cols) */}
           <div className="lg:col-span-7 gta-card rounded-3xl p-8">
             <div className="border-b border-white/10 pb-4 mb-6">
               <h3 className="text-xl font-black font-heading text-white uppercase">
-                SEND A MESSAGE
+                SEND A MESSAGE (NODEMAILER API)
               </h3>
             </div>
 
@@ -79,7 +102,7 @@ export const Contact = () => {
                   placeholder="Enter your name..."
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full p-3.5 bg-[#080314] border border-white/20 focus:border-[#00f0ff] rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                  className="w-full p-3.5 bg-[#060212] border border-white/20 focus:border-[#00f0ff] rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                 />
               </div>
 
@@ -93,7 +116,7 @@ export const Contact = () => {
                   placeholder="your.email@domain.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full p-3.5 bg-[#080314] border border-white/20 focus:border-[#00f0ff] rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                  className="w-full p-3.5 bg-[#060212] border border-white/20 focus:border-[#00f0ff] rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                 />
               </div>
 
@@ -107,18 +130,24 @@ export const Contact = () => {
                   placeholder="Describe your project or message..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full p-3.5 bg-[#080314] border border-white/20 focus:border-[#00f0ff] rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                  className="w-full p-3.5 bg-[#060212] border border-white/20 focus:border-[#00f0ff] rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 rounded-xl bg-gradient-to-r from-[#ff007f] via-[#ff6b00] to-[#00f0ff] hover:brightness-110 text-white font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 transition-all cursor-pointer"
+                disabled={loading}
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-[#ff007f] via-[#ff6b00] to-[#00f0ff] hover:brightness-110 text-white font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 transition-all cursor-pointer disabled:opacity-50"
               >
-                {sent ? (
+                {loading ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin text-white" />
+                    <span>SENDING VIA NODEMAILER...</span>
+                  </>
+                ) : sent ? (
                   <>
                     <Check size={18} className="text-[#55ff55]" />
-                    <span>MESSAGE SENT!</span>
+                    <span>MESSAGE SENT SUCCESSFULLY!</span>
                   </>
                 ) : (
                   <>
