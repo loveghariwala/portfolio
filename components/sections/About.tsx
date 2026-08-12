@@ -1,168 +1,177 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
-import { Heading } from "@/components/ui/Heading";
 import { DATA } from "@/constants/data";
-import { Zap, Code, Palette, Rocket, Target, Heart } from "lucide-react";
-import { useRef } from "react";
-import { cn } from "@/lib/utils";
+import { Zap, Code2, Sparkles, Heart, Shield, ShieldAlert, Cpu, Award, DollarSign } from "lucide-react";
 
 const highlights = [
-  { icon: Zap, label: "Performance", value: "100%", color: "text-amber-500", bg: "bg-amber-500/10" },
-  { icon: Code, label: "Clean Code", value: "Strict", color: "text-blue-500", bg: "bg-blue-500/10" },
-  { icon: Palette, label: "Pixel Perfect", value: "Obsessive", color: "text-pink-500", bg: "bg-pink-500/10" },
+  { icon: Zap, label: "Performance", value: "Sub-50ms SSR", color: "#00f0ff" },
+  { icon: Code2, label: "Architecture", value: "Clean & Modular", color: "#ff007f" },
+  { icon: Sparkles, label: "Design System", value: "Pixel Perfect", color: "#ffcc00" },
 ];
 
-const StatCard = ({ item, index }: { item: any; index: number }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.1 * index, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-    viewport={{ once: true }}
-    className="group glass-card p-6 rounded-[2rem] border border-white/5 hover:border-primary/20 transition-all duration-500"
-  >
-    <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110", item.bg)}>
-      <item.icon size={24} className={item.color} />
-    </div>
-    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/50 mb-1">{item.label}</p>
-    <p className="text-xl font-bold font-heading">{item.value}</p>
-  </motion.div>
-);
-
 export const About = () => {
-  const containerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const imageScale = useTransform(scrollYProgress, [0, 0.5], [1.2, 1]);
-  const imageOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
-
   return (
-    <section id="about" ref={containerRef} className="py-32 relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-full dot-grid opacity-[0.2] pointer-events-none" />
-      <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-[120px] animate-pulse" />
+    <section id="about-story" className="py-24 relative gta-vice-gradient-bg font-mono">
+      <div className="absolute inset-0 vice-grid opacity-15 pointer-events-none" />
 
-      <Container>
-        {/* Large Decorative Header */}
-        <div className="mb-24 relative">
+      <Container className="relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          {/* LEFT: GTA CHARACTER SPECIFICATION CARD WITH SMALL TOP-RIGHT GTA 6 ARTWORK (5 Cols) */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 0.05, x: 0 }}
-            transition={{ duration: 1 }}
-            className="absolute -top-16 -left-4 text-[12vw] font-black font-heading text-foreground pointer-events-none uppercase select-none leading-none"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="lg:col-span-5 relative"
           >
-            AESTHETIC
-          </motion.div>
-          <div className="relative z-10">
-            <span className="text-primary font-bold tracking-[0.4em] text-xs uppercase mb-4 block font-mono">// The Story</span>
-            <Heading size="xl" className="leading-[0.95] max-w-4xl">
-              I code with <span className="gradient-text">precision</span>,<br />
-              I design with <span className="text-foreground/40">emotion.</span>
-            </Heading>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
-          {/* Left: Image Reveal Area */}
-          <motion.div
-            style={{ opacity: imageOpacity }}
-            className="lg:col-span-5 relative group"
-          >
-            <div className="relative aspect-[4/5] rounded-[3.5rem] overflow-hidden border border-white/10 shadow-3xl bg-zinc-900 tilt-card">
-              <motion.div
-                style={{ scale: imageScale }}
-                className="w-full h-full relative"
-              >
-                {/* Actual Profile Image */}
-                <div className="absolute inset-0 bg-zinc-900">
-                  {DATA.personal.avatar ? (
-                     <>
-                        <img 
-                           src={DATA.personal.avatar} 
-                           alt={DATA.personal.name}
-                           className="w-full h-full object-cover grayscale-[0.3] hover:grayscale-0 transition-all duration-700"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-                     </>
-                  ) : (
-                     <div className="w-full h-full flex items-center justify-center">
-                        <span className="text-[140px] font-black font-heading text-white/[0.03] select-none uppercase">LG</span>
-                     </div>
-                  )}
+            <div className="gta-card rounded-3xl p-6 relative overflow-hidden border border-[#ff007f]/40">
+              
+              {/* Header Bar */}
+              <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6 text-xs">
+                <div className="flex items-center gap-2 text-white font-extrabold uppercase">
+                  <Cpu size={16} className="text-[#ff007f]" />
+                  <span>CHARACTER SPECIFICATION</span>
                 </div>
+                <span className="text-[10px] text-[#00f0ff] font-bold">VICE CITY // SURAT</span>
+              </div>
 
-                {/* Personal Info floating over image */}
-                <div className="absolute bottom-10 left-10 right-10 p-8 glass rounded-[2.5rem] border border-white/20 translate-y-10 group-hover:translate-y-0 transition-transform duration-700 opacity-0 group-hover:opacity-100">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                      <Rocket size={20} className="text-primary" />
-                    </div>
+              {/* Character Details Box with Small Top-Right GTA 6 Avatar */}
+              <div className="bg-[#060212] border border-white/10 p-5 rounded-2xl mb-6">
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <div className="space-y-3">
                     <div>
-                      <p className="text-xs font-black uppercase tracking-widest text-white">Passion Driven</p>
-                      <p className="text-xs text-secondary">Creative Engineer</p>
+                      <span className="text-[9px] text-[#00f0ff] font-extrabold uppercase tracking-widest block">
+                        AGENT NAME
+                      </span>
+                      <h3 className="text-2xl font-black font-heading text-white uppercase">
+                        {DATA.personal.name}
+                      </h3>
+                    </div>
+
+                    <div>
+                      <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest block">
+                        PRIMARY ROLE
+                      </span>
+                      <p className="text-xs text-[#ff007f] font-bold font-sans">
+                        {DATA.personal.role}
+                      </p>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            </div>
 
-            {/* Floating Achievement Badge */}
-            <motion.div
-              animate={{ y: [0, -20, 0] }}
-              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-              className="absolute -top-8 -right-8 glass p-6 rounded-[2rem] border border-white/20 shadow-glow z-20"
-            >
-              <div className="text-center">
-                <p className="text-xs font-black uppercase tracking-widest text-primary mb-1">Impact</p>
-                <p className="text-4xl font-black font-heading tracking-tighter">120%</p>
-                <p className="text-[10px] text-secondary/60 mt-1 uppercase font-bold tracking-widest">Growth rate</p>
+                  {/* SMALL GTA 6 CHARACTER ARTWORK IN TOP RIGHT CORNER */}
+                  <div className="w-16 h-16 rounded-xl border-2 border-[#ff007f] overflow-hidden shadow-[0_0_15px_rgba(255,0,127,0.4)] shrink-0 bg-[#060212]">
+                    <img
+                      src="/profile/gta_character_love_ghariwala.png"
+                      alt="GTA 6 Character Love Ghariwala"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase">VALUATION:</span>
+                  <span className="gta-cash-text text-sm font-black">$40,000,000</span>
+                </div>
               </div>
-            </motion.div>
+
+              {/* GTA Status Meters (Health, Armor, Wanted Rating) */}
+              <div className="space-y-3">
+                <div className="bg-[#060212] border border-white/10 p-3.5 rounded-xl space-y-2.5">
+                  <div className="flex items-center justify-between text-xs font-bold">
+                    <span className="flex items-center gap-1.5 text-[#55ff55]">
+                      <Heart size={14} fill="#55ff55" /> HEALTH:
+                    </span>
+                    <span className="text-[#55ff55]">100%</span>
+                  </div>
+                  <div className="w-full h-2 bg-slate-950 rounded-full overflow-hidden">
+                    <div className="h-full bg-[#55ff55] w-full" />
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs font-bold pt-1">
+                    <span className="flex items-center gap-1.5 text-[#00f0ff]">
+                      <Shield size={14} fill="#00f0ff" /> ARMOR:
+                    </span>
+                    <span className="text-[#00f0ff]">100%</span>
+                  </div>
+                  <div className="w-full h-2 bg-slate-950 rounded-full overflow-hidden">
+                    <div className="h-full bg-[#00f0ff] w-full" />
+                  </div>
+                </div>
+
+                {/* Wanted Level 5 Stars */}
+                <div className="bg-[#060212] border border-[#ff007f]/40 p-3.5 rounded-xl flex items-center justify-between">
+                  <span className="text-xs text-slate-300 font-bold uppercase tracking-wider flex items-center gap-2">
+                    <ShieldAlert size={16} className="text-[#ffcc00]" />
+                    SKILL RATING:
+                  </span>
+                  <div className="text-[#ffcc00] text-base font-bold tracking-widest">
+                    ★ ★ ★ ★ ★
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </motion.div>
 
-          {/* Right: Content Section */}
-          <div className="lg:col-span-7 space-y-12">
-            <div className="space-y-8">
-              <p className="text-2xl md:text-3xl font-medium leading-normal text-foreground/90">
-                Hello, I’m <span className="next-gen-gradient font-black font-heading">{DATA.personal.name}</span>. A visionary developer based in <span className="underline decoration-accent decoration-4 underline-offset-8">{DATA.personal.location}</span>.
-              </p>
-              <div className="h-px w-full bg-gradient-to-r from-border via-border/20 to-transparent" />
-              <p className="text-xl text-secondary leading-relaxed">
-                {DATA.personal.bio} I believe that every line of code should contribute to a better, more beautiful digital landscape.
-              </p>
-            </div>
-
-            {/* Feature Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {highlights.map((item, idx) => (
-                <StatCard key={item.label} item={item} index={idx} />
-              ))}
-            </div>
-
-            {/* Philosophy Section */}
-            <motion.div
-              initial={{ opacity: 0, filter: "blur(10px)" }}
-              whileInView={{ opacity: 1, filter: "blur(0px)" }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="p-10 rounded-[3rem] bg-primary/5 border border-primary/10 relative overflow-hidden group"
-            >
-              <Target size={120} className="absolute -bottom-10 -right-10 text-primary/5 transform rotate-12 transition-transform group-hover:rotate-45 duration-1000" />
-              <div className="relative z-10">
-                <p className="text-sm font-black uppercase tracking-[0.3em] text-primary mb-6 flex items-center gap-3">
-                  <Heart size={14} fill="currentColor" />
-                  My Philosophy
-                </p>
-                <p className="text-2xl md:text-3xl font-heading font-black italic tracking-tight leading-snug">
-                  "Style is a way to say who you are <span className="text-primary/60">without having to speak.</span>"
-                </p>
+          {/* RIGHT: STORY CONTENT (7 Cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="lg:col-span-7 flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center gap-2 text-xs text-[#00f0ff] font-extrabold uppercase tracking-widest mb-2">
+                <Award size={16} className="text-[#ff007f]" />
+                <span>// DEVELOPER DOSSIER</span>
               </div>
-            </motion.div>
-          </div>
+
+              <h2 className="text-4xl sm:text-6xl font-black font-heading tracking-tight text-white uppercase mb-6">
+                CRAFTING <span className="gta-vi-logo-text">DIGITAL PRODUCTS</span>
+              </h2>
+
+              <p className="text-base sm:text-lg text-slate-200 font-sans leading-relaxed mb-6 font-normal">
+                Hello, I&apos;m <span className="text-white font-bold">{DATA.personal.name}</span>, a Frontend &amp; Backend Developer based in <span className="text-[#00f0ff] font-bold">{DATA.personal.location}</span>.
+              </p>
+
+              <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed mb-8">
+                {DATA.personal.bio} I specialize in engineering high-speed Next.js web platforms, custom REST APIs, dynamic state management, and responsive Vice City aesthetic interfaces.
+              </p>
+            </div>
+
+            {/* HIGHLIGHT CARDS */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {highlights.map((h) => {
+                const HIcon = h.icon;
+                return (
+                  <div
+                    key={h.label}
+                    className="gta-card p-4 text-center border-t-2"
+                    style={{ borderTopColor: h.color }}
+                  >
+                    <div
+                      className="w-8 h-8 rounded-lg mx-auto mb-2 flex items-center justify-center"
+                      style={{ backgroundColor: `${h.color}20`, border: `1px solid ${h.color}` }}
+                    >
+                      <HIcon size={16} style={{ color: h.color }} />
+                    </div>
+                    <span className="text-[10px] text-slate-400 font-bold uppercase block mb-1">
+                      {h.label}
+                    </span>
+                    <span className="text-xs text-white font-extrabold block">
+                      {h.value}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+
+          </motion.div>
+
         </div>
       </Container>
     </section>

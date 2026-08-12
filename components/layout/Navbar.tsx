@@ -1,11 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { Moon, Sun, Menu, X, Download, Globe } from "lucide-react";
-import { useTheme } from "next-themes";
+import { motion, AnimatePresence } from "framer-motion";
+import { Download, X, Menu, Star, MapPin } from "lucide-react";
 import { Container } from "./Container";
-import { Button } from "../ui/Button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ResumeModal } from "@/components/ui/ResumeModal";
@@ -24,19 +22,16 @@ export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [isResumeOpen, setIsResumeOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-
-      // Active section detection
-      const sections = navItems.map(item => item.href.replace("#", ""));
+      setIsScrolled(window.scrollY > 40);
+      const sections = navItems.map((item) => item.href.replace("/#", ""));
       for (const section of sections.reverse()) {
         const el = document.getElementById(section);
-        if (el && el.getBoundingClientRect().top <= 200) {
+        if (el && el.getBoundingClientRect().top <= 250) {
           setActiveSection(section);
           break;
         }
@@ -49,153 +44,110 @@ export const Navbar = () => {
   if (!mounted) return null;
 
   return (
-    <nav
-      className={cn(
-        "fixed top-8 left-0 right-0 z-[100] transition-all duration-700 pointer-events-none",
-        isScrolled ? "top-4" : "top-8"
-      )}
-    >
-      <Container className="flex justify-center">
-        <motion.div
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className={cn(
-            "pointer-events-auto relative flex items-center gap-8 px-8 py-3 rounded-[2.5rem] transition-all duration-700 border shadow-2xl overflow-hidden",
-            isScrolled
-              ? "glass border-primary/20 bg-background/40 backdrop-blur-[20px] scale-95"
-              : "bg-background/10 backdrop-blur-sm border-white/5"
-          )}
-        >
-          {/* Animated Background Glow */}
-          {isScrolled && (
-            <div className="absolute inset-0 z-[-1] opacity-20">
-              <div className="absolute top-0 left-1/4 w-1/2 h-full bg-gradient-to-r from-transparent via-primary to-transparent blur-[40px]" />
-            </div>
-          )}
-
-          <Link href="/" className="text-xl font-heading font-black tracking-tighter group flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-xs text-white shadow-glow group-hover:rotate-[360deg] transition-all duration-700 overflow-hidden border border-white/10">
-              {DATA.personal.avatar ? (
-                <img src={DATA.personal.avatar} alt="LG" className="w-full h-full object-cover" />
-              ) : (
-                "LG"
-              )}
-            </div>
-            <span className="relative z-10 group-hover:text-primary transition-colors duration-300 uppercase">
-              {DATA.personal.name.split(' ')[0]}
-              <span className="text-primary group-hover:text-white transition-colors">.</span>
+    <header className="fixed top-0 left-0 right-0 z-[100] font-mono">
+      {/* TOP HUD BAR */}
+      <div className="w-full bg-[#080314] border-b border-[#ff007f]/30 px-4 py-2 flex items-center justify-between gap-4 select-none">
+        
+        {/* Left: Brand Logo */}
+        <Link href="/" className="flex items-center gap-3">
+          <div className="px-3 py-1 bg-gradient-to-r from-[#ff007f] via-[#ff6b00] to-[#00f0ff] text-white font-black tracking-widest text-base rounded">
+            VI
+          </div>
+          <div className="flex flex-col">
+            <span className="font-heading text-base font-extrabold uppercase text-white tracking-wider leading-none">
+              {DATA.personal.name}
             </span>
-          </Link>
+            <span className="text-[10px] text-[#00f0ff] tracking-widest uppercase font-bold mt-0.5">
+              NEXT.JS ARCHITECT // {DATA.personal.location}
+            </span>
+          </div>
+        </Link>
 
-          <div className="w-px h-6 bg-white/10 hidden md:block" />
+        {/* Center: Rating Stars */}
+        <div className="hidden md:flex items-center gap-2 bg-[#0e0624] border border-[#ff007f]/40 px-3.5 py-1 rounded-full text-xs">
+          <span className="text-slate-300 font-bold uppercase text-[10px] tracking-wider">
+            SKILL RATING:
+          </span>
+          <span className="text-[#ffcc00] tracking-widest font-bold">
+            ★ ★ ★ ★ ★
+          </span>
+        </div>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-2">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.href.replace("#", "");
+        {/* Right: Actions */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setIsResumeOpen(true)}
+            className="flex items-center gap-2 px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#ff007f] to-[#ff6b00] text-white text-xs font-black uppercase tracking-widest transition-all hover:brightness-110 cursor-pointer"
+          >
+            <Download size={14} />
+            <span>RESUME</span>
+          </button>
+
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-slate-200"
+          >
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </div>
+
+      {/* NAVIGATION DOCK BAR */}
+      <nav className="w-full bg-[#080314]/90 border-b border-white/10 py-2 hidden md:block">
+        <Container className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            {navItems.map((item, idx) => {
+              const sectionId = item.href.replace("/#", "");
+              const isActive = activeSection === sectionId;
               return (
                 <Link
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "relative text-[11px] font-black uppercase tracking-[0.2em] px-5 py-2 rounded-2xl transition-all duration-500 group",
-                    isActive ? "text-primary" : "text-foreground/40 hover:text-white"
+                    "text-xs font-mono font-bold uppercase tracking-widest px-4 py-2 rounded-lg transition-colors flex items-center gap-2",
+                    isActive
+                      ? "text-[#00f0ff] bg-[#ff007f]/15 border border-[#ff007f]/40"
+                      : "text-slate-400 hover:text-white hover:bg-white/5"
                   )}
                 >
-                  <span className="relative z-10">{item.name}</span>
-                  {isActive ? (
-                    <motion.span
-                      layoutId="activeNav"
-                      className="absolute inset-0 bg-primary/10 border border-primary/20 rounded-2xl -z-10 shadow-glow-sm"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    />
-                  ) : (
-                    <span className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 rounded-2xl -z-10 transition-opacity" />
-                  )}
+                  <span className="text-[9px] text-[#ff007f]">0{idx + 1}.</span>
+                  <span>{item.name}</span>
                 </Link>
               );
             })}
           </div>
 
-          <div className="w-px h-6 bg-white/10 hidden md:block" />
-
-          {/* Actions */}
-          <div className="flex items-center gap-4">
-            <Button
-              onClick={() => setIsResumeOpen(true)}
-              variant="primary"
-              className="hidden md:flex h-10 px-6 rounded-xl text-[10px] uppercase font-black tracking-widest gap-2 group/res"
-            >
-              <Download size={14} className="group-hover/res:-translate-y-0.5 transition-transform" />
-              Resume
-            </Button>
-
-            <div className="hidden lg:flex items-center gap-2">
-              {DATA.social.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-xl hover:bg-white/10 hover:text-primary transition-all text-foreground/60"
-                  title={item.name}
-                >
-                  {item.name === "GitHub" ? <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.28 1.15-.28 2.35 0 3.5-.73 1.02-1.08 2.25-1 3.5 0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></svg> : <Globe size={18} />}
-                </a>
-              ))}
-            </div>
-
-            <motion.button
-              whileHover={{ scale: 1.1, rotate: 180 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-xl hover:text-primary transition-colors text-foreground/60"
-            >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-            </motion.button>
-
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-foreground/60"
-            >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+          <div className="flex items-center gap-2 text-xs text-[#55ff55] font-bold">
+            <span className="w-2 h-2 rounded-full bg-[#55ff55] animate-pulse" />
+            <span>{DATA.personal.availability}</span>
           </div>
-        </motion.div>
-      </Container>
+        </Container>
+      </nav>
 
-      {/* Mobile Menu - Futuristic Reveal */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="absolute top-full left-4 right-4 mt-6 glass rounded-[3rem] p-4 border border-primary/20 md:hidden z-[101]"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="md:hidden bg-[#0e0624] border-b border-[#ff007f]/40 p-5 flex flex-col gap-3 font-mono"
           >
-            <div className="grid grid-cols-1 gap-2">
-              {navItems.map((item, idx) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between py-5 px-8 rounded-3xl hover:bg-primary/10 group transition-all"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="text-[10px] font-mono text-primary/40 group-hover:text-primary transition-colors">0{idx + 1}</span>
-                    <span className="text-sm font-black uppercase tracking-widest">{item.name}</span>
-                  </div>
-                  <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    →
-                  </div>
-                </Link>
-              ))}
-            </div>
+            {navItems.map((item, idx) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="py-2.5 px-4 rounded-lg bg-white/5 text-xs text-slate-200 uppercase font-bold hover:bg-[#ff007f]/20 hover:text-[#00f0ff]"
+              >
+                0{idx + 1}. {item.name}
+              </Link>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
+
       <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
-    </nav>
+    </header>
   );
 };

@@ -41,7 +41,7 @@ export const DATA = {
         "/neomovies/screencapture-neocinematv-vercel-app-series-2026-05-18-16_04_11.png"
       ],
       tags: ["Next.js", "FastAPI", "MongoDB", "Tailwind", "Hugging Face", "Qdrant"],
-      link: "https://neocinematv.vercel.app/",
+      link: "https://www.neocinematv.com/",
       github: "https://github.com/loveghariwala/neocinema",
       challenges: [
         "Securing HTML5 sandboxed iframes to block popup redirect ads.",

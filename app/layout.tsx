@@ -3,12 +3,10 @@ import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { siteMetadata } from "@/constants/metadata";
-import { CustomCursor } from "@/components/ui/CustomCursor";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { FloatingShapes } from "@/components/ui/FloatingShapes";
-import { GeometricFlow } from "@/components/ui/GeometricFlow";
+import { Preloader } from "@/components/ui/Preloader";
+import { IFruitPhone } from "@/components/ui/IFruitPhone";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -33,24 +31,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} font-sans min-h-screen bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary`}
+        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} font-sans min-h-screen bg-[#060212] text-foreground antialiased selection:bg-[#ff007f]/30 selection:text-[#00f0ff]`}
       >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
+          forcedTheme="dark"
           disableTransitionOnChange
         >
-          <div className="relative flex min-h-screen flex-col overflow-x-hidden">
-            <FloatingShapes />
-            <GeometricFlow />
-            <ScrollProgress />
-            <CustomCursor />
+          <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-[#060212]">
+            <Preloader />
             <Navbar />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 relative z-10">{children}</main>
             <Footer />
+            <IFruitPhone />
           </div>
         </ThemeProvider>
       </body>
