@@ -418,8 +418,11 @@ export const IFruitPhone = () => {
             setIsOpen(!isOpen);
             playClick();
           }}
-          className="relative w-28 h-44 bg-[#0a0214] border-2 border-[#ff007f] hover:border-[#00f0ff] rounded-3xl p-2 shadow-[0_0_35px_rgba(255,0,127,0.5)] hover:scale-105 transition-all group flex flex-col justify-between overflow-hidden cursor-pointer select-none"
+          aria-label="Open interactive iFruit HUD phone"
+          aria-expanded={isOpen}
+          className="relative w-28 h-44 bg-[#0a0214] border-2 border-[#ff007f] hover:border-[#00f0ff] rounded-3xl p-2 shadow-[0_0_35px_rgba(255,0,127,0.5)] hover:scale-105 transition-all group flex flex-col justify-between overflow-hidden cursor-pointer select-none focus:outline-none focus:ring-2 focus:ring-[#00f0ff]"
         >
+
           {/* Top Speaker & Notch */}
           <div className="w-full flex items-center justify-between px-1">
             <div className="w-2 h-2 rounded-full bg-[#55ff55] animate-pulse" />

@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { DATA } from "@/constants/data";
-import { ArrowRight, Mail, Heart, Shield, MapPin, Code2, Sparkles, Terminal } from "lucide-react";
+import { ArrowRight, Mail, Heart, Shield, MapPin, Code2, Sparkles } from "lucide-react";
 import { gtaAudio } from "@/lib/gtaAudio";
 
 export const Hero = () => {
@@ -12,10 +13,13 @@ export const Hero = () => {
 
       {/* GTA 6 VICE CITY CINEMATIC BACKDROP */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <img
+        <Image
           src="/gta6_hero_bg.jpg"
-          alt="GTA 6 Vice City Sunset"
-          className="w-full h-full object-cover object-center opacity-35 scale-105 filter saturate-150 contrast-125"
+          alt="GTA 6 Vice City Sunset Boulevard"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center opacity-35 filter saturate-150 contrast-125"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#060212] via-[#060212]/80 to-[#060212]/50" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#060212] via-transparent to-[#060212]/90" />
@@ -23,7 +27,7 @@ export const Hero = () => {
       </div>
 
       {/* 3D GTA VI WATERMARK */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0" aria-hidden="true">
         <span className="text-[38vw] font-black gta-vi-numeral select-none leading-none opacity-20">
           VI
         </span>
@@ -51,10 +55,10 @@ export const Hero = () => {
             </h1>
 
             {/* Role Title */}
-            <p className="text-lg sm:text-2xl font-mono text-[#00f0ff] font-extrabold uppercase tracking-wider mb-6 flex items-center gap-2 drop-shadow-[0_0_15px_rgba(0,240,255,0.6)]">
-              <Sparkles size={20} className="text-[#ff007f] animate-spin" />
+            <h2 className="text-lg sm:text-2xl font-mono text-[#00f0ff] font-extrabold uppercase tracking-wider mb-6 flex items-center gap-2 drop-shadow-[0_0_15px_rgba(0,240,255,0.6)]">
+              <Sparkles size={20} className="text-[#ff007f] animate-spin" aria-hidden="true" />
               <span>{DATA.personal.role}</span>
-            </p>
+            </h2>
 
             {/* Bio Description */}
             <p className="text-base sm:text-lg text-slate-200 font-sans leading-relaxed max-w-2xl font-normal mb-8 bg-[#060212]/60 p-4 rounded-2xl border border-white/10 backdrop-blur-sm">
@@ -67,7 +71,7 @@ export const Hero = () => {
                 <span className="text-3xl sm:text-4xl text-white block font-heading tech-number-stat mb-1">
                   2+ YRS
                 </span>
-                <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-widest block">
+                <span className="text-[10px] sm:text-xs text-slate-300 font-bold uppercase tracking-widest block">
                   EXPERIENCE
                 </span>
               </div>
@@ -76,7 +80,7 @@ export const Hero = () => {
                 <span className="text-3xl sm:text-4xl block font-heading tech-number-cyan mb-1">
                   10+
                 </span>
-                <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-widest block">
+                <span className="text-[10px] sm:text-xs text-slate-300 font-bold uppercase tracking-widest block">
                   MISSIONS
                 </span>
               </div>
@@ -85,34 +89,32 @@ export const Hero = () => {
                 <span className="text-3xl sm:text-4xl block font-heading tech-number-gold mb-1">
                   99/100
                 </span>
-                <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-widest block">
+                <span className="text-[10px] sm:text-xs text-slate-300 font-bold uppercase tracking-widest block">
                   PERFORMANCE
                 </span>
               </div>
             </div>
 
-            {/* CTAs */}
+            {/* CTAs - Accessible Touch Targets (No nested button inside a) */}
             <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xl font-mono">
               <a
                 href="#projects"
                 onClick={() => gtaAudio.playClick()}
-                className="flex-1"
+                className="flex-1 min-h-[48px] py-4 px-6 rounded-xl bg-gradient-to-r from-[#ff007f] via-[#ff2a85] to-[#ff6b00] hover:brightness-110 text-white text-xs uppercase font-extrabold tracking-widest flex items-center justify-center gap-3 transition-all shadow-[0_0_30px_rgba(255,0,127,0.5)] focus:outline-none focus:ring-2 focus:ring-[#00f0ff]"
+                aria-label="Explore and view heist missions"
               >
-                <button className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#ff007f] via-[#ff2a85] to-[#ff6b00] hover:brightness-110 text-white text-xs uppercase font-extrabold tracking-widest flex items-center justify-center gap-3 transition-all shadow-[0_0_30px_rgba(255,0,127,0.5)] cursor-pointer">
-                  <span>VIEW HEIST MISSIONS</span>
-                  <ArrowRight size={16} />
-                </button>
+                <span>VIEW HEIST MISSIONS</span>
+                <ArrowRight size={16} aria-hidden="true" />
               </a>
 
               <a
                 href="#contact"
                 onClick={() => gtaAudio.playClick()}
-                className="flex-1"
+                className="flex-1 min-h-[48px] py-4 px-6 rounded-xl bg-[#090317]/90 border-2 border-[#00f0ff]/60 text-[#00f0ff] text-xs uppercase font-extrabold tracking-widest flex items-center justify-center gap-3 hover:bg-[#00f0ff]/20 hover:border-[#00f0ff] transition-all shadow-[0_0_20px_rgba(0,240,255,0.3)] focus:outline-none focus:ring-2 focus:ring-[#ff007f]"
+                aria-label="Transmit dispatch message"
               >
-                <button className="w-full py-4 px-6 rounded-xl bg-[#090317]/90 border-2 border-[#00f0ff]/60 text-[#00f0ff] text-xs uppercase font-extrabold tracking-widest flex items-center justify-center gap-3 hover:bg-[#00f0ff]/20 hover:border-[#00f0ff] transition-all shadow-[0_0_20px_rgba(0,240,255,0.3)] cursor-pointer">
-                  <Mail size={16} />
-                  <span>TRANSMIT DISPATCH</span>
-                </button>
+                <Mail size={16} aria-hidden="true" />
+                <span>TRANSMIT DISPATCH</span>
               </a>
             </div>
           </motion.div>
@@ -129,25 +131,28 @@ export const Hero = () => {
               {/* Rockstar Header Bar */}
               <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-5 font-mono text-xs">
                 <div className="flex items-center gap-2 text-white font-bold uppercase">
-                  <Code2 size={16} className="text-[#ff007f]" />
+                  <Code2 size={16} className="text-[#ff007f]" aria-hidden="true" />
                   <span>GTA VI // PROTAGONIST</span>
                 </div>
                 <div className="flex items-center gap-1.5 text-[#00f0ff] text-[10px] font-bold">
-                  <MapPin size={12} />
+                  <MapPin size={12} aria-hidden="true" />
                   <span>LEONIDA / SURAT</span>
                 </div>
               </div>
 
-              {/* Character Poster Image */}
+              {/* Character Poster Image with Next/Image */}
               <div className="relative aspect-[4/5] max-w-[340px] mx-auto rounded-2xl overflow-hidden border-2 border-[#00f0ff]/50 bg-[#04010a] mb-5 shadow-2xl group-hover:border-[#ff007f] transition-colors duration-500">
-                <img
+                <Image
                   src={DATA.personal.avatar}
                   alt="Love Ghariwala GTA 6 Character Poster"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter contrast-110"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 340px"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 filter contrast-110"
                 />
 
                 {/* Vice City Neon Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#060212] via-transparent to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#060212] via-transparent to-transparent opacity-80" aria-hidden="true" />
 
                 {/* Watermark Tag */}
                 <div className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-[#060212]/90 border border-[#ffcc00] font-mono text-[9px] text-[#ffcc00] font-black uppercase tracking-widest shadow-lg">
@@ -174,22 +179,22 @@ export const Hero = () => {
                   {/* Health Bar */}
                   <div className="flex items-center justify-between text-xs font-black">
                     <span className="flex items-center gap-1.5 text-[#55ff55]">
-                      <Heart size={14} fill="#55ff55" /> HEALTH:
+                      <Heart size={14} fill="#55ff55" aria-hidden="true" /> HEALTH:
                     </span>
                     <span className="text-[#55ff55] font-mono">100%</span>
                   </div>
-                  <div className="w-full h-2.5 bg-slate-950 rounded-full overflow-hidden border border-white/10">
+                  <div className="w-full h-2.5 bg-slate-950 rounded-full overflow-hidden border border-white/10" role="progressbar" aria-valuenow={100} aria-valuemin={0} aria-valuemax={100} aria-label="Health Status">
                     <div className="h-full bg-gradient-to-r from-[#55ff55] to-[#22c55e] w-full shadow-[0_0_10px_#55ff55]" />
                   </div>
 
                   {/* Armor Bar */}
                   <div className="flex items-center justify-between text-xs font-black pt-1">
                     <span className="flex items-center gap-1.5 text-[#00f0ff]">
-                      <Shield size={14} fill="#00f0ff" /> ARMOR:
+                      <Shield size={14} fill="#00f0ff" aria-hidden="true" /> ARMOR:
                     </span>
                     <span className="text-[#00f0ff] font-mono">100%</span>
                   </div>
-                  <div className="w-full h-2.5 bg-slate-950 rounded-full overflow-hidden border border-white/10">
+                  <div className="w-full h-2.5 bg-slate-950 rounded-full overflow-hidden border border-white/10" role="progressbar" aria-valuenow={100} aria-valuemin={0} aria-valuemax={100} aria-label="Armor Status">
                     <div className="h-full bg-gradient-to-r from-[#00f0ff] to-[#3b82f6] w-full shadow-[0_0_10px_#00f0ff]" />
                   </div>
                 </div>

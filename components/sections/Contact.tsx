@@ -41,7 +41,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 relative gta-vice-gradient-bg font-mono">
+    <section id="contact" className="py-24 relative gta-vice-gradient-bg font-mono" aria-labelledby="contact-heading">
       <div className="absolute inset-0 vice-grid opacity-15 pointer-events-none" />
 
       <Container className="relative z-10">
@@ -51,10 +51,10 @@ export const Contact = () => {
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 text-xs text-[#00f0ff] font-extrabold uppercase tracking-widest mb-2">
-                <Mail size={16} className="text-[#ff007f]" />
+                <Mail size={16} className="text-[#ff007f]" aria-hidden="true" />
                 <span>// GET IN TOUCH</span>
               </div>
-              <h2 className="text-4xl sm:text-6xl font-black font-heading tracking-tight text-white uppercase mb-4">
+              <h2 id="contact-heading" className="text-4xl sm:text-6xl font-black font-heading tracking-tight text-white uppercase mb-4">
                 LET&apos;S <span className="gta-vi-logo-text">CONNECT</span>
               </h2>
               <p className="text-xs text-slate-300 font-sans leading-relaxed mb-8">
@@ -65,20 +65,22 @@ export const Contact = () => {
             <div className="space-y-4">
               <div className="gta-card p-4 flex items-center gap-4 border-l-4 border-l-[#ff007f]">
                 <div className="w-10 h-10 rounded-lg bg-[#ff007f]/20 border border-[#ff007f] flex items-center justify-center text-[#ff007f]">
-                  <Mail size={18} />
+                  <Mail size={18} aria-hidden="true" />
                 </div>
                 <div>
-                  <span className="text-[9px] text-slate-400 font-bold uppercase block">DIRECT EMAIL:</span>
-                  <span className="text-xs text-white font-bold">{DATA.personal.email}</span>
+                  <span className="text-[9px] text-slate-300 font-bold uppercase block">DIRECT EMAIL:</span>
+                  <a href={`mailto:${DATA.personal.email}`} className="text-xs text-white font-bold hover:text-[#00f0ff] transition-colors">
+                    {DATA.personal.email}
+                  </a>
                 </div>
               </div>
 
               <div className="gta-card p-4 flex items-center gap-4 border-l-4 border-l-[#00f0ff]">
                 <div className="w-10 h-10 rounded-lg bg-[#00f0ff]/20 border border-[#00f0ff] flex items-center justify-center text-[#00f0ff]">
-                  <MapPin size={18} />
+                  <MapPin size={18} aria-hidden="true" />
                 </div>
                 <div>
-                  <span className="text-[9px] text-slate-400 font-bold uppercase block">LOCATION:</span>
+                  <span className="text-[9px] text-slate-300 font-bold uppercase block">LOCATION:</span>
                   <span className="text-xs text-white font-bold">{DATA.personal.location}</span>
                 </div>
               </div>
@@ -95,12 +97,14 @@ export const Contact = () => {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="text-[10px] text-slate-300 font-bold uppercase tracking-widest block mb-2">
+                <label htmlFor="contact-name" className="text-[10px] text-slate-300 font-bold uppercase tracking-widest block mb-2">
                   YOUR NAME
                 </label>
                 <input
+                  id="contact-name"
                   type="text"
                   required
+                  autoComplete="name"
                   placeholder="Enter your name..."
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -109,12 +113,14 @@ export const Contact = () => {
               </div>
 
               <div>
-                <label className="text-[10px] text-slate-300 font-bold uppercase tracking-widest block mb-2">
+                <label htmlFor="contact-email" className="text-[10px] text-slate-300 font-bold uppercase tracking-widest block mb-2">
                   YOUR EMAIL
                 </label>
                 <input
+                  id="contact-email"
                   type="email"
                   required
+                  autoComplete="email"
                   placeholder="your.email@domain.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -123,10 +129,11 @@ export const Contact = () => {
               </div>
 
               <div>
-                <label className="text-[10px] text-slate-300 font-bold uppercase tracking-widest block mb-2">
+                <label htmlFor="contact-message" className="text-[10px] text-slate-300 font-bold uppercase tracking-widest block mb-2">
                   MESSAGE
                 </label>
                 <textarea
+                  id="contact-message"
                   rows={4}
                   required
                   placeholder="Describe your project or message..."
@@ -138,7 +145,7 @@ export const Contact = () => {
 
               {/* Status alerts */}
               {status === "error" && (
-                <div className="p-3 bg-red-950/50 border border-red-500/50 rounded-xl flex items-center justify-between gap-3 text-xs text-red-200">
+                <div role="alert" className="p-3 bg-red-950/50 border border-red-500/50 rounded-xl flex items-center justify-between gap-3 text-xs text-red-200">
                   <div className="flex items-center gap-2">
                     <AlertCircle size={16} className="text-red-400 shrink-0" />
                     <span>{errorMessage}</span>
@@ -155,22 +162,23 @@ export const Contact = () => {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full py-4 rounded-xl bg-gradient-to-r from-[#ff007f] via-[#ff6b00] to-[#00f0ff] hover:brightness-110 text-white font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 transition-all cursor-pointer disabled:opacity-50"
+                className="w-full min-h-[48px] py-4 rounded-xl bg-gradient-to-r from-[#ff007f] via-[#ff6b00] to-[#00f0ff] hover:brightness-110 text-white font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 transition-all cursor-pointer disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-[#00f0ff]"
+                aria-label="Send contact message"
               >
                 {status === "loading" ? (
                   <>
-                    <Loader2 size={18} className="animate-spin text-white" />
+                    <Loader2 size={18} className="animate-spin text-white" aria-hidden="true" />
                     <span>TRANSMITTING VIA NODEMAILER...</span>
                   </>
                 ) : status === "success" ? (
                   <>
-                    <Check size={18} className="text-[#55ff55]" />
+                    <Check size={18} className="text-[#55ff55]" aria-hidden="true" />
                     <span>MESSAGE TRANSMITTED TO LOVE!</span>
                   </>
                 ) : (
                   <>
                     <span>SEND MESSAGE</span>
-                    <Send size={16} />
+                    <Send size={16} aria-hidden="true" />
                   </>
                 )}
               </button>
@@ -182,4 +190,3 @@ export const Contact = () => {
     </section>
   );
 };
-

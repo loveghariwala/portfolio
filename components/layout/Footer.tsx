@@ -38,9 +38,10 @@ export const Footer = () => {
                 LOVE<span className="text-[#ff007f]">.</span>
               </span>
             </div>
-            <p className="text-sm text-secondary/50 font-medium">
+            <p className="text-sm text-slate-300 font-medium">
               © {new Date().getFullYear()} {DATA.personal.name}. Crafted with precision.
             </p>
+
           </div>
 
           <div className="flex items-center gap-3">
