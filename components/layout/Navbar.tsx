@@ -49,9 +49,9 @@ export const Navbar = () => {
       <div className="w-full bg-[#080314] border-b border-[#ff007f]/30 px-4 py-2 flex items-center justify-between gap-4 select-none">
         
         {/* Left: Brand Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <div className="px-3 py-1 bg-gradient-to-r from-[#ff007f] via-[#ff6b00] to-[#00f0ff] text-white font-black tracking-widest text-base rounded">
-            VI
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 rounded-xl overflow-hidden border border-[#ff007f]/50 shadow-[0_0_12px_rgba(255,0,127,0.4)] shrink-0 bg-[#080314] group-hover:border-[#00f0ff] transition-all">
+            <img src="/logo.png" alt="Love Ghariwala Logo" className="w-full h-full object-cover" />
           </div>
           <div className="flex flex-col">
             <span className="font-heading text-base font-extrabold uppercase text-white tracking-wider leading-none">

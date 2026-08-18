@@ -7,6 +7,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Preloader } from "@/components/ui/Preloader";
 import { IFruitPhone } from "@/components/ui/IFruitPhone";
+import { RootJsonLd } from "@/components/seo/JsonLd";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -41,6 +42,7 @@ export default function RootLayout({
           forcedTheme="dark"
           disableTransitionOnChange
         >
+          <RootJsonLd />
           <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-[#060212]">
             <Preloader />
             <Navbar />

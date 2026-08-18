@@ -14,11 +14,15 @@ export async function POST(req: Request) {
     const isEmailConfigured = process.env.EMAIL_USER && process.env.EMAIL_PASS;
 
     if (!isEmailConfigured) {
-      // Fallback for development if .env is not loaded or missing
-      return new Response(JSON.stringify({ error: "Email service not configured. Please add EMAIL_USER and EMAIL_PASS to .env" }), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({
+          error: "Email service not configured. Please add EMAIL_USER and EMAIL_PASS to .env",
+        }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
 
     const transporter = nodemailer.createTransport({
@@ -30,70 +34,113 @@ export async function POST(req: Request) {
     });
 
     const mailOptions = {
-      from: email,
+      from: `"${name} (PRIORITY DISPATCH)" <${process.env.EMAIL_USER}>`,
+      replyTo: email,
       to: process.env.EMAIL_USER,
-      subject: `New Portfolio Message from ${name}`,
+      subject: `⭐⭐⭐⭐⭐ PRIORITY DISPATCH // ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       html: `
-        <div style="background-color: #050505; padding: 40px; font-family: 'Outfit', sans-serif; color: #fafafa;">
-          <div style="max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.03); border: 1px solid rgba(124,58,237,0.2); border-radius: 32px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <title>Dispatch Transmission</title>
+        </head>
+        <body style="margin: 0; padding: 0; background-color: #ffffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: #ffffff;">
+          
+          <div style="max-width: 620px; margin: 30px auto; background: #080314; border: 2px solid #ffffffff; border-radius: 28px; overflow: hidden; box-shadow: 0 0 50px rgba(255, 0, 127, 0.4);">
             
-            <!-- Header Section -->
-            <div style="background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); padding: 40px; text-align: center;">
-              <div style="display: inline-block; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 16px; margin-bottom: 20px;">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/sent.png" width="30" height="30" style="display: block;" />
-              </div>
-              <h1 style="margin: 0; font-size: 28px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase;">New Transmission</h1>
-              <p style="margin: 10px 0 0; opacity: 0.8; font-weight: 500; letter-spacing: 2px; font-size: 10px; text-transform: uppercase;">Lead Captured from Portfolio</p>
-            </div>
-
-            <!-- Content Body -->
-            <div style="padding: 40px;">
-              <div style="margin-bottom: 30px;">
-                <p style="text-transform: uppercase; font-size: 10px; font-weight: 900; color: #7c3aed; letter-spacing: 2px; margin-bottom: 8px;">Sender Details</p>
-                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05);">
-                  <p style="margin: 0; font-size: 18px; font-weight: 700;">${name}</p>
-                  <p style="margin: 5px 0 0; font-size: 14px; opacity: 0.5;">${email}</p>
-                </div>
+            <!-- GTA VI HEADER BANNER -->
+            <div style="background: linear-gradient(135deg, #ff3434ff 0%, #ff7028ff 50%, #ff70cbff 100%); padding: 36px 30px; text-align: center; position: relative;">
+              
+              <!-- WANTED LEVEL STARS -->
+              <div style="background: rgba(4, 1, 10, 0.75); display: inline-block; padding: 6px 18px; border-radius: 20px; margin-bottom: 14px; border: 1px solid rgba(255, 255, 255, 0.6);">
+                <span style="color: #ffe600ff; font-size: 14px; letter-spacing: 4px; font-weight: 900;">★ ★ ★ ★ ★</span>
+                <span style="color: #ffffff; font-size: 10px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-left: 6px;">WANTED LEVEL 5</span>
               </div>
 
-              <div style="margin-bottom: 30px;">
-                <p style="text-transform: uppercase; font-size: 10px; font-weight: 900; color: #7c3aed; letter-spacing: 2px; margin-bottom: 8px;">Message Content</p>
-                <div style="background: rgba(255,255,255,0.05); padding: 24px; border-radius: 16px; border-left: 4px solid #7c3aed;">
-                   <p style="margin: 0; font-size: 16px; line-height: 1.6; opacity: 0.9;">${message}</p>
-                </div>
-              </div>
-
-              <!-- CTA / Footer -->
-              <div style="text-align: center; margin-top: 40px;">
-                <a href="mailto:${email}" style="display: inline-block; background: #7c3aed; color: #ffffff; padding: 16px 32px; border-radius: 16px; text-decoration: none; font-weight: 900; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 20px rgba(124,58,237,0.3);">
-                  Reply to ${name.split(' ')[0]}
-                </a>
-              </div>
-            </div>
-
-            <!-- Bottom Note -->
-            <div style="padding: 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02);">
-              <p style="margin: 0; font-size: 10px; opacity: 0.3; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
-                Generated by LOVE GHARIWALA PORTFOLIO ENGINE v1.0
+              <!-- MAIN TITLE -->
+              <h1 style="margin: 0; font-size: 32px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; color: #ffffff; text-shadow: 0 3px 15px rgba(0, 0, 0, 0.6);">
+                PRIORITY DISPATCH
+              </h1>
+              <p style="margin: 8px 0 0; color: #ffffff; font-weight: 800; letter-spacing: 3px; font-size: 11px; text-transform: uppercase; opacity: 0.95;">
+                LEONIDA NODE // PRIORITY CLIENT TRANSMISSION
               </p>
             </div>
+
+            <!-- MAIN BODY -->
+            <div style="padding: 36px 30px; background: #060210;">
+              
+              <!-- SENDER INTEL CARD -->
+              <div style="margin-bottom: 24px;">
+                <p style="text-transform: uppercase; font-size: 10px; font-weight: 900; color: #ff007f; letter-spacing: 2px; margin: 0 0 8px 4px;">
+                  // OPERATOR CLIENT INTEL
+                </p>
+                <div style="background: #0d0420; padding: 20px; border-radius: 16px; border: 1px solid rgba(255, 0, 127, 0.35); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);">
+                  <div style="display: flex; align-items: center; margin-bottom: 6px;">
+                    <span style="font-size: 18px; font-weight: 900; color: #ffffff; text-transform: uppercase; letter-spacing: 0.5px;">${name}</span>
+                  </div>
+                  <div style="color: #00f0ff; font-size: 13px; font-weight: 700; font-family: monospace;">
+                    ✉ ${email}
+                  </div>
+                </div>
+              </div>
+
+              <!-- MESSAGE CONTENT CARD -->
+              <div style="margin-bottom: 30px;">
+                <p style="text-transform: uppercase; font-size: 10px; font-weight: 900; color: #00f0ff; letter-spacing: 2px; margin: 0 0 8px 4px;">
+                  // MISSION BRIEFING / MESSAGE CONTENT
+                </p>
+                <div style="background: #0a031a; padding: 24px; border-radius: 16px; border-left: 5px solid #00f0ff; border-top: 1px solid rgba(255, 255, 255, 0.08); border-right: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                  <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #f1f5f9; font-family: monospace; white-space: pre-wrap;">${message}</p>
+                </div>
+              </div>
+
+              <!-- CTA REPLY BUTTON -->
+              <div style="text-align: center; margin: 36px 0 10px;">
+                <a href="mailto:${email}" style="display: inline-block; background: linear-gradient(90deg, #ff007f 0%, #ff5500 100%); color: #ffffff; padding: 18px 40px; border-radius: 14px; text-decoration: none; font-weight: 900; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 25px rgba(255, 0, 127, 0.6); border: 1px solid #ff007f;">
+                  ⚡ DIRECT REPLY TO ${name.split(" ")[0].toUpperCase()}
+                </a>
+              </div>
+              
+              <p style="text-align: center; margin: 12px 0 0; color: #64748b; font-size: 11px; font-family: monospace;">
+                Clicking reply will send an email directly to ${email}
+              </p>
+            </div>
+
+            <!-- GTA VI FOOTER -->
+            <div style="padding: 20px 30px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); background: #030008;">
+              <p style="margin: 0; font-size: 10px; color: #94a3b8; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">
+                VICE CITY OS // LOVE GHARIWALA PORTFOLIO ENGINE v6.0
+              </p>
+              <p style="margin: 4px 0 0; font-size: 9px; color: #55ff55; font-weight: 700; font-family: monospace; letter-spacing: 1px;">
+                STATUS: 100% ENCRYPTED TRANSMISSION
+              </p>
+            </div>
+
           </div>
-        </div>
+        </body>
+        </html>
       `,
     };
 
     await transporter.sendMail(mailOptions);
 
-    return new Response(JSON.stringify({ success: true, message: "Email sent successfully" }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ success: true, message: "Email sent successfully" }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   } catch (error: any) {
     console.error("Email error:", error);
-    return new Response(JSON.stringify({ error: "Failed to send email", details: error.message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: "Failed to send email", details: error.message }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 }

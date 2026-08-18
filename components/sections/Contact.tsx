@@ -3,16 +3,18 @@
 import { useState } from "react";
 import { Container } from "@/components/layout/Container";
 import { DATA } from "@/constants/data";
-import { Send, Mail, MapPin, Check, Loader2 } from "lucide-react";
+import { Send, Mail, MapPin, Check, Loader2, AlertCircle } from "lucide-react";
+import { gtaAudio } from "@/lib/gtaAudio";
 
 export const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setStatus("loading");
+    setErrorMessage("");
 
     try {
       const res = await fetch("/api/contact", {
@@ -21,20 +23,20 @@ export const Contact = () => {
         body: JSON.stringify(formData),
       });
 
-      if (res.ok) {
-        setSent(true);
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setStatus("success");
         setFormData({ name: "", email: "", message: "" });
+        gtaAudio.playMissionPassed();
+        setTimeout(() => setStatus("idle"), 6000);
       } else {
-        // Fallback to mailto link if EMAIL_USER / EMAIL_PASS environment variables are not configured in Vercel
-        window.location.href = `mailto:${DATA.personal.email}?subject=Portfolio Contact from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}`;
-        setSent(true);
+        setStatus("error");
+        setErrorMessage(data.error || "Failed to deliver message.");
       }
-    } catch (err) {
-      window.location.href = `mailto:${DATA.personal.email}?subject=Portfolio Contact from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}`;
-      setSent(true);
-    } finally {
-      setLoading(false);
-      setTimeout(() => setSent(false), 4000);
+    } catch (err: any) {
+      setStatus("error");
+      setErrorMessage(err.message || "Network error. Please try again.");
     }
   };
 
@@ -44,7 +46,7 @@ export const Contact = () => {
 
       <Container className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
-          
+
           {/* LEFT: CONTACT INFO (5 Cols) */}
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
@@ -87,7 +89,7 @@ export const Contact = () => {
           <div className="lg:col-span-7 gta-card rounded-3xl p-8">
             <div className="border-b border-white/10 pb-4 mb-6">
               <h3 className="text-xl font-black font-heading text-white uppercase">
-                SEND A MESSAGE (NODEMAILER API)
+                SEND A MESSAGE
               </h3>
             </div>
 
@@ -134,20 +136,36 @@ export const Contact = () => {
                 />
               </div>
 
+              {/* Status alerts */}
+              {status === "error" && (
+                <div className="p-3 bg-red-950/50 border border-red-500/50 rounded-xl flex items-center justify-between gap-3 text-xs text-red-200">
+                  <div className="flex items-center gap-2">
+                    <AlertCircle size={16} className="text-red-400 shrink-0" />
+                    <span>{errorMessage}</span>
+                  </div>
+                  <a
+                    href={`mailto:${DATA.personal.email}?subject=Portfolio Inquiry from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}`}
+                    className="underline text-[#00f0ff] text-[10px] font-bold uppercase shrink-0"
+                  >
+                    Open Mail App
+                  </a>
+                </div>
+              )}
+
               <button
                 type="submit"
-                disabled={loading}
+                disabled={status === "loading"}
                 className="w-full py-4 rounded-xl bg-gradient-to-r from-[#ff007f] via-[#ff6b00] to-[#00f0ff] hover:brightness-110 text-white font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 transition-all cursor-pointer disabled:opacity-50"
               >
-                {loading ? (
+                {status === "loading" ? (
                   <>
                     <Loader2 size={18} className="animate-spin text-white" />
-                    <span>SENDING VIA NODEMAILER...</span>
+                    <span>TRANSMITTING VIA NODEMAILER...</span>
                   </>
-                ) : sent ? (
+                ) : status === "success" ? (
                   <>
                     <Check size={18} className="text-[#55ff55]" />
-                    <span>MESSAGE SENT SUCCESSFULLY!</span>
+                    <span>MESSAGE TRANSMITTED TO LOVE!</span>
                   </>
                 ) : (
                   <>
@@ -164,3 +182,4 @@ export const Contact = () => {
     </section>
   );
 };
+

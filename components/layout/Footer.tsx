@@ -30,9 +30,14 @@ export const Footer = () => {
       <Container>
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
           <div className="flex flex-col items-center md:items-start gap-3">
-            <span className="text-2xl font-heading font-black tracking-tight">
-              LOVE<span className="text-primary">.</span>
-            </span>
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg overflow-hidden border border-[#ff007f]/40 bg-[#080314] shadow-[0_0_8px_rgba(255,0,127,0.3)]">
+                <img src="/logo.png" alt="Love Ghariwala Logo" className="w-full h-full object-cover" />
+              </div>
+              <span className="text-2xl font-heading font-black tracking-tight text-white">
+                LOVE<span className="text-[#ff007f]">.</span>
+              </span>
+            </div>
             <p className="text-sm text-secondary/50 font-medium">
               © {new Date().getFullYear()} {DATA.personal.name}. Crafted with precision.
             </p>
