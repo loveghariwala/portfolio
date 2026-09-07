@@ -144,9 +144,17 @@ export const About = () => {
                 Hello, I&apos;m <span className="text-white font-bold">{DATA.personal.name}</span>, a Frontend &amp; Backend Developer based in <span className="text-[#00f0ff] font-bold">{DATA.personal.location}</span>.
               </p>
 
-              <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed mb-8">
-                {DATA.personal.bio} I specialize in engineering high-speed Next.js web platforms, custom REST APIs, dynamic state management, and responsive Vice City aesthetic interfaces.
-              </p>
+              <div className="space-y-4 text-xs sm:text-sm text-slate-300 font-sans leading-relaxed mb-8">
+                <p>
+                  <strong className="text-[#00f0ff] font-bold">Frontend Engineering:</strong> I build scalable, high-performance web applications leveraging Next.js (App Router, Server Components, SSR/SSG), React, and TypeScript. My focus centers on clean architecture, reusable component design, dynamic state management, and performance-driven, accessible UI crafted with Tailwind CSS and Framer Motion.
+                </p>
+                <p>
+                  <strong className="text-[#ff007f] font-bold">Backend &amp; API Architecture:</strong> On the server side, I engineer robust RESTful APIs and microservices using Node.js, Express, and FastAPI. I specialize in schema design and query optimization across PostgreSQL, Supabase, and MongoDB, secure authentication (JWT/OAuth), and seamless payment gateway and webhook integrations.
+                </p>
+                <p>
+                  <strong className="text-[#a855f7] font-bold">GenAI &amp; Applied AI Practice:</strong> Beyond traditional web development, I actively implement applied Generative AI solutions in production. This includes architecting Retrieval-Augmented Generation (RAG) pipelines, semantic vector search with Qdrant, sentence-transformer embeddings via Hugging Face, and intelligent LLM integrations to power context-aware digital products.
+                </p>
+              </div>
             </div>
 
             {/* HIGHLIGHT CARDS */}

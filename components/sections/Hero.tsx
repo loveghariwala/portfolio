@@ -69,7 +69,7 @@ export const Hero = () => {
             <div className="grid grid-cols-3 gap-4 w-full max-w-2xl mb-8 font-mono">
               <div className="gta-card p-4 text-center border-t-2 border-t-[#ff007f] hover:scale-105 transition-transform">
                 <span className="text-3xl sm:text-4xl text-white block font-heading tech-number-stat mb-1">
-                  2+ YRS
+                  1+ YRS
                 </span>
                 <span className="text-[10px] sm:text-xs text-slate-300 font-bold uppercase tracking-widest block">
                   EXPERIENCE

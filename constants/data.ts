@@ -2,7 +2,7 @@ export const DATA = {
   personal: {
     name: "Love Ghariwala",
     role: "Frontend & Backend Developer (Next.js Specialist)",
-    bio: "I specialize in building scalable and visually appealing web applications using Next.js and Tailwind CSS. I focus on clean architecture, reusable components, and performance-driven UI.",
+    bio: "Full Stack Developer specializing in high-performance Next.js architectures, scalable backend REST APIs, and applied Generative AI solutions. Experienced in building production web applications, RAG pipelines, and intelligent semantic vector search systems with clean, modular engineering.",
     avatar: "/profile/gta_character_love_ghariwala.png",
     location: "Surat, Gujarat, India",
 
@@ -74,10 +74,12 @@ export const DATA = {
       color: "#a855f7",
       description: "Semantic search, vector embeddings, and retrieval-augmented generation.",
       items: [
+        "Generative AI (GenAI)",
+        "Applied AI Practice & LLMs",
+        "RAG (Retrieval-Augmented Generation)",
         "Hugging Face Transformers (Sentence Embeddings)",
         "Qdrant Vector Database",
         "Semantic Search",
-        "RAG (Retrieval-Augmented Generation)",
         "Vector Similarity Search",
         "HNSW Indexing",
       ],
@@ -90,11 +92,13 @@ export const DATA = {
       items: [
         "Git & GitHub",
         "Vercel",
+        "Cloudflare",
+        "Render",
+        "Netlify",
         "Railway",
         "Docker",
         "CI/CD Pipelines",
         "Postman",
-        "Webpack",
         "Unit Testing",
         "Agile / Scrum Methodology",
       ],
@@ -210,29 +214,6 @@ export const DATA = {
         "Learned scalable project structure"
       ],
       impact: "Delivered a modern brand identity that improved user engagement by 25%."
-    },
-    {
-      slug: "personal-portfolio",
-      title: "Personal Portfolio",
-      description: "Modern portfolio built with App Router, focusing on clean architecture and high-end animations.",
-      image: "/profile/2.png",
-      screenshots: [
-        "/profile/2.png",
-      ],
-      tags: ["Next.js", "TypeScript", "Framer Motion", "Tailwind"],
-      link: "https://loveportfolio.vercel.app/",
-      github: "https://github.com/loveghariwala",
-      challenges: [
-        "Designing scalable component architecture",
-        "Implementing smooth animations and interactions",
-        "Using AI prompts effectively for development"
-      ],
-      learnings: [
-        "Improved modular component design",
-        "Learned animation techniques using modern tools",
-        "Explored AI-assisted development workflows"
-      ],
-      impact: "Created a high-conversion digital presence that showcases technical depth and design sense."
     },
   ],
   education: [

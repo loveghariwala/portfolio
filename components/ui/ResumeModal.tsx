@@ -98,7 +98,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:#1e293b;background:#fff;fo
    <div class="skills-grid">
       <div class="skills-cat"><b>Frontend:</b> Next.js, React.js, TypeScript, Tailwind CSS, Framer Motion, HTML5, CSS3</div>
       <div class="skills-cat"><b>Backend & APIs:</b> FastAPI, Node.js, Express.js, REST APIs</div>
-      <div class="skills-cat"><b>Databases & DevOps:</b> MongoDB, PostgreSQL, Supabase, Git, GitHub, Vercel, SEO</div>
+      <div class="skills-cat"><b>Databases & DevOps:</b> MongoDB, PostgreSQL, Supabase, Git, GitHub, Vercel, Cloudflare, Render, Netlify</div>
    </div>
 </div>
 
@@ -284,7 +284,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:#1e293b;background:#fff;fo
                            <div className="grid grid-cols-1 gap-1 text-[8.5px] leading-[1.35]" style={{ color: '#334155' }}>
                               <div><b style={{ color: '#4f46e5' }}>Frontend:</b> Next.js, React.js, TypeScript, Tailwind CSS, Framer Motion, HTML5, CSS3</div>
                               <div><b style={{ color: '#4f46e5' }}>Backend & APIs:</b> FastAPI, Node.js, Express.js, REST APIs</div>
-                              <div><b style={{ color: '#4f46e5' }}>Databases & DevOps:</b> MongoDB, PostgreSQL, Supabase, Git, GitHub, Vercel, SEO</div>
+                              <div><b style={{ color: '#4f46e5' }}>Databases & DevOps:</b> MongoDB, PostgreSQL, Supabase, Git, GitHub, Vercel, Cloudflare, Render, Netlify</div>
                            </div>
                         </div>
 
