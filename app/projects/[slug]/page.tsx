@@ -22,38 +22,51 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   if (!project) return {};
 
   const pageUrl = `${SITE_URL}/projects/${project.slug}`;
-  const imageUrl = project.image ? `${SITE_URL}${project.image}` : undefined;
+  const bannerImage = project.image ? `${SITE_URL}${project.image}` : `${SITE_URL}/og-image.png`;
+  const seoDescription = `${project.title} architectural case study by Full Stack Developer Love Ghariwala. Built with ${project.tags.slice(0, 4).join(', ')}.`;
 
   return {
-    title: `${project.title} - Project Case Study`,
-    description: project.description,
-    keywords: [project.title, ...project.tags, "Love Ghariwala", "Case Study", "Web Development"],
+    title: `${project.title} — Case Study & Architecture`,
+    description: seoDescription,
+    keywords: [
+      project.title,
+      ...project.tags,
+      'Love Ghariwala',
+      'Full Stack Developer',
+      'Software Architecture',
+      'Next.js Case Study',
+      'Web Application Engineering',
+      'Production System Design',
+    ],
     alternates: {
       canonical: `/projects/${project.slug}`,
+      languages: {
+        'en-US': `/projects/${project.slug}`,
+      },
     },
     openGraph: {
-      title: `${project.title} | Love Ghariwala`,
-      description: project.description,
+      title: `${project.title} — Case Study & Architecture | Love Ghariwala`,
+      description: seoDescription,
       url: pageUrl,
       type: 'article',
       siteName: 'Love Ghariwala Portfolio',
-      images: imageUrl
-        ? [
-            {
-              url: imageUrl,
-              width: 1200,
-              height: 630,
-              alt: `${project.title} screenshot`,
-            },
-          ]
-        : [],
+      locale: 'en_US',
+      images: [
+        {
+          url: bannerImage,
+          width: 1200,
+          height: 630,
+          alt: `${project.title} Architecture Preview`,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${project.title} | Love Ghariwala`,
-      description: project.description,
-      images: imageUrl ? [imageUrl] : [],
+      title: `${project.title} — Case Study & Architecture | Love Ghariwala`,
+      description: seoDescription,
+      images: [bannerImage],
       creator: '@loveghariwala',
+      site: '@loveghariwala',
     },
   };
 }
@@ -73,4 +86,3 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     </>
   );
 }
-

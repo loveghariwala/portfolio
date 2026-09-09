@@ -12,7 +12,8 @@ import {
   AlertCircle, 
   Lightbulb,
   ArrowUpRight,
-  Sparkle
+  Sparkle,
+  ChevronRight
 } from "lucide-react";
 import Link from "next/link";
 import { useRef } from "react";
@@ -96,6 +97,23 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
                    animate={{ opacity: 1, y: 0 }}
                    transition={{ duration: 1, ease: "easeOut" }}
                 >
+                   {/* Accessible Semantic Breadcrumb */}
+                   <nav aria-label="Breadcrumb" className="mb-6">
+                      <ol className="flex items-center flex-wrap gap-2 text-[11px] font-mono tracking-wider uppercase text-white/50">
+                         <li className="flex items-center gap-2">
+                            <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+                            <ChevronRight size={13} className="text-white/20" />
+                         </li>
+                         <li className="flex items-center gap-2">
+                            <Link href="/#projects" className="hover:text-primary transition-colors">Projects</Link>
+                            <ChevronRight size={13} className="text-white/20" />
+                         </li>
+                         <li className="text-primary font-semibold" aria-current="page">
+                            {project.title}
+                         </li>
+                      </ol>
+                   </nav>
+
                    <div className="flex items-center gap-4 mb-10">
                       <Link 
                         href="/#projects" 

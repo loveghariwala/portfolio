@@ -10,12 +10,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: SITE_URL,
       lastModified: currentDate,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 1.0,
     },
   ];
 
-  // Dynamic project detail routes
+  // Dynamic project detail case study routes
   const projectRoutes: MetadataRoute.Sitemap = DATA.projects.map((project) => ({
     url: `${SITE_URL}/projects/${project.slug}`,
     lastModified: currentDate,
