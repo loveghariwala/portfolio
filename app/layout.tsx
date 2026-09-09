@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -42,6 +44,20 @@ export default function RootLayout({
           forcedTheme="dark"
           disableTransitionOnChange
         >
+          {/* Google tag (gtag.js) */}
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-PFMG0N9DN3"
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-PFMG0N9DN3');
+            `}
+          </Script>
           <RootJsonLd />
           <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-[#07060c]">
             <Preloader />
@@ -49,6 +65,7 @@ export default function RootLayout({
             <main className="flex-1 relative z-10">{children}</main>
             <Footer />
             <CommandPalette />
+            <Analytics />
           </div>
         </ThemeProvider>
       </body>
