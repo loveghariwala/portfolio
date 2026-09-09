@@ -4,217 +4,227 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { DATA } from "@/constants/data";
-import { ArrowRight, Mail, Heart, Shield, MapPin, Code2, Sparkles } from "lucide-react";
-import { gtaAudio } from "@/lib/gtaAudio";
+import {
+  ArrowRight,
+  Mail,
+  Sparkles,
+  Code2,
+  Globe,
+  Cpu,
+  Terminal,
+  Activity,
+  CheckCircle2,
+  Layers,
+  ChevronDown,
+} from "lucide-react";
 
 export const Hero = () => {
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section id="about" className="relative min-h-[92vh] pt-36 pb-24 flex items-center overflow-hidden bg-[#060212]">
+    <section
+      id="about"
+      className="relative min-h-screen pt-32 sm:pt-36 pb-20 flex flex-col justify-between overflow-hidden bg-[#07060c] bg-ambient-mesh"
+    >
+      {/* SUBTLE BACKGROUND GRID & GLOWS */}
+      <div className="absolute inset-0 bg-dot-grid opacity-25 pointer-events-none" />
+      
+      {/* Ambient Radial Lighting */}
+      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-purple-600/15 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-1/3 right-1/4 w-[450px] h-[450px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* GTA 6 VICE CITY CINEMATIC BACKDROP */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <Image
-          src="/gta6_hero_bg.jpg"
-          alt="GTA 6 Vice City Sunset Boulevard"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center opacity-35 filter saturate-150 contrast-125"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060212] via-[#060212]/80 to-[#060212]/50" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#060212] via-transparent to-[#060212]/90" />
-        <div className="absolute inset-0 vice-grid opacity-20" />
-      </div>
-
-      {/* 3D GTA VI WATERMARK */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0" aria-hidden="true">
-        <span className="text-[38vw] font-black gta-vi-numeral select-none leading-none opacity-20">
-          VI
-        </span>
-      </div>
-
-      <Container className="relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-
-          {/* LEFT COLUMN: TYPOGRAPHY & DATA (7 Cols) */}
+      <Container className="relative z-10 my-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* LEFT COLUMN: HEADLINE & ACTIONS (7 COLS) */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-7 flex flex-col items-start font-sans"
+            className="lg:col-span-7 flex flex-col items-start"
           >
-            {/* Mission Live Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-[#090317]/90 border border-[#ff007f]/50 shadow-[0_0_20px_rgba(255,0,127,0.3)] font-mono text-xs text-[#00f0ff] font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#55ff55] animate-pulse" />
-              <span>VICE CITY NODE // {DATA.personal.availability}</span>
+            {/* Availability Pill */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-medium text-slate-300 mb-6 backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span className="uppercase tracking-widest text-[11px] font-semibold text-emerald-400">
+                {DATA.personal.availability}
+              </span>
             </div>
 
-            {/* Main Headline with GTA 6 styling */}
-            <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight leading-[0.92] uppercase mb-4 gta-hero-title drop-shadow-[0_0_35px_rgba(255,0,127,0.4)]">
-              {DATA.personal.name}
+            {/* Main Headline */}
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.05] text-white mb-6">
+              Turning bits <br />
+              into{" "}
+              <span className="title-gradient">
+                Masterpieces.
+              </span>
             </h1>
 
-            {/* Role Title */}
-            <h2 className="text-lg sm:text-2xl font-mono text-[#00f0ff] font-extrabold uppercase tracking-wider mb-6 flex items-center gap-2 drop-shadow-[0_0_15px_rgba(0,240,255,0.6)]">
-              <Sparkles size={20} className="text-[#ff007f] animate-spin" aria-hidden="true" />
-              <span>{DATA.personal.role}</span>
-            </h2>
-
-            {/* Bio Description */}
-            <p className="text-base sm:text-lg text-slate-200 font-sans leading-relaxed max-w-2xl font-normal mb-8 bg-[#060212]/60 p-4 rounded-2xl border border-white/10 backdrop-blur-sm">
-              {DATA.personal.bio}
+            {/* Sub-headline / Bio */}
+            <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl font-normal mb-8">
+              I am <strong className="text-white font-semibold">{DATA.personal.name}</strong>, a specialized{" "}
+              <span className="text-purple-300 font-semibold">{DATA.personal.role}</span>. I build scalable, high-performance web applications using Next.js, robust backend APIs, and applied Generative AI systems.
             </p>
 
-            {/* STAT CARDS (HUD METRICS) */}
-            <div className="grid grid-cols-3 gap-4 w-full max-w-2xl mb-8 font-mono">
-              <div className="gta-card p-4 text-center border-t-2 border-t-[#ff007f] hover:scale-105 transition-transform">
-                <span className="text-3xl sm:text-4xl text-white block font-heading tech-number-stat mb-1">
-                  1+ YRS
-                </span>
-                <span className="text-[10px] sm:text-xs text-slate-300 font-bold uppercase tracking-widest block">
-                  EXPERIENCE
-                </span>
-              </div>
+            {/* ACTION BUTTONS */}
+            <div className="flex flex-wrap items-center gap-4 mb-10 w-full sm:w-auto">
+              <button
+                onClick={() => scrollTo("projects")}
+                className="btn-primary inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-bold tracking-wide cursor-pointer w-full sm:w-auto"
+              >
+                <span>View My Portfolio</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
 
-              <div className="gta-card p-4 text-center border-t-2 border-t-[#00f0ff] hover:scale-105 transition-transform">
-                <span className="text-3xl sm:text-4xl block font-heading tech-number-cyan mb-1">
-                  10+
-                </span>
-                <span className="text-[10px] sm:text-xs text-slate-300 font-bold uppercase tracking-widest block">
-                  MISSIONS
-                </span>
-              </div>
-
-              <div className="gta-card p-4 text-center border-t-2 border-t-[#ffcc00] hover:scale-105 transition-transform">
-                <span className="text-3xl sm:text-4xl block font-heading tech-number-gold mb-1">
-                  99/100
-                </span>
-                <span className="text-[10px] sm:text-xs text-slate-300 font-bold uppercase tracking-widest block">
-                  PERFORMANCE
-                </span>
-              </div>
+              <button
+                onClick={() => scrollTo("contact")}
+                className="btn-secondary inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-sm font-semibold cursor-pointer w-full sm:w-auto"
+              >
+                <Sparkles className="w-4 h-4 text-purple-400" />
+                <span>Contact Me</span>
+              </button>
             </div>
 
-            {/* CTAs - Accessible Touch Targets (No nested button inside a) */}
-            <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xl font-mono">
-              <a
-                href="#projects"
-                onClick={() => gtaAudio.playClick()}
-                className="flex-1 min-h-[48px] py-4 px-6 rounded-xl bg-gradient-to-r from-[#ff007f] via-[#ff2a85] to-[#ff6b00] hover:brightness-110 text-white text-xs uppercase font-extrabold tracking-widest flex items-center justify-center gap-3 transition-all shadow-[0_0_30px_rgba(255,0,127,0.5)] focus:outline-none focus:ring-2 focus:ring-[#00f0ff]"
-                aria-label="Explore and view heist missions"
-              >
-                <span>VIEW HEIST MISSIONS</span>
-                <ArrowRight size={16} aria-hidden="true" />
-              </a>
-
-              <a
-                href="#contact"
-                onClick={() => gtaAudio.playClick()}
-                className="flex-1 min-h-[48px] py-4 px-6 rounded-xl bg-[#090317]/90 border-2 border-[#00f0ff]/60 text-[#00f0ff] text-xs uppercase font-extrabold tracking-widest flex items-center justify-center gap-3 hover:bg-[#00f0ff]/20 hover:border-[#00f0ff] transition-all shadow-[0_0_20px_rgba(0,240,255,0.3)] focus:outline-none focus:ring-2 focus:ring-[#ff007f]"
-                aria-label="Transmit dispatch message"
-              >
-                <Mail size={16} aria-hidden="true" />
-                <span>TRANSMIT DISPATCH</span>
-              </a>
+            {/* QUICK STATS METRICS ROW */}
+            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/10 w-full max-w-lg">
+              <div>
+                <div className="text-2xl sm:text-3xl font-extrabold text-white font-heading">
+                  5+
+                </div>
+                <div className="text-xs text-slate-400 uppercase tracking-wider mt-0.5">
+                  Production Apps
+                </div>
+              </div>
+              <div>
+                <div className="text-2xl sm:text-3xl font-extrabold text-purple-400 font-heading">
+                  100K+
+                </div>
+                <div className="text-xs text-slate-400 uppercase tracking-wider mt-0.5">
+                  Monthly Pageviews
+                </div>
+              </div>
+              <div>
+                <div className="text-2xl sm:text-3xl font-extrabold text-cyan-400 font-heading">
+                  99.9%
+                </div>
+                <div className="text-xs text-slate-400 uppercase tracking-wider mt-0.5">
+                  Uptime & Reliability
+                </div>
+              </div>
             </div>
           </motion.div>
 
-          {/* RIGHT COLUMN: GTA 6 CHARACTER POSTER CARD (5 Cols) */}
+          {/* RIGHT COLUMN: INTERACTIVE PROFILE CARD WITH PHOTO & TELEMETRY (5 COLS) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="lg:col-span-5 relative"
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="lg:col-span-5 relative flex justify-center"
           >
-            <div className="gta-card rounded-3xl p-6 relative overflow-hidden border-2 border-[#ff007f]/50 shadow-[0_0_50px_rgba(255,0,127,0.35)] backdrop-blur-xl group">
-
-              {/* Rockstar Header Bar */}
-              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-5 font-mono text-xs">
-                <div className="flex items-center gap-2 text-white font-bold uppercase">
-                  <Code2 size={16} className="text-[#ff007f]" aria-hidden="true" />
-                  <span>GTA VI // PROTAGONIST</span>
+            <div className="relative w-full max-w-[420px] aspect-[4/5] rounded-[2.5rem] p-3 bg-gradient-to-b from-white/15 to-white/5 border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+              
+              {/* Inner Card Container */}
+              <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-[#0c0a18] border border-white/10">
+                
+                {/* macOS Style Window Controls in Top-Left */}
+                <div className="absolute top-4 left-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/10">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
                 </div>
-                <div className="flex items-center gap-1.5 text-[#00f0ff] text-[10px] font-bold">
-                  <MapPin size={12} aria-hidden="true" />
-                  <span>LEONIDA / SURAT</span>
-                </div>
-              </div>
 
-              {/* Character Poster Image with Next/Image */}
-              <div className="relative aspect-[4/5] max-w-[340px] mx-auto rounded-2xl overflow-hidden border-2 border-[#00f0ff]/50 bg-[#04010a] mb-5 shadow-2xl group-hover:border-[#ff007f] transition-colors duration-500">
+                {/* Code badge in Top-Right */}
+                <div className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-slate-300">
+                  <Code2 className="w-4 h-4 text-purple-400" />
+                </div>
+
+                {/* Portrait Photo */}
                 <Image
-                  src={DATA.personal.avatar}
-                  alt="Love Ghariwala GTA 6 Character Poster"
+                  src="/profile/love_ghariwala.jpg"
+                  alt="Love Ghariwala - Full Stack Next.js & Backend Developer"
                   fill
                   priority
-                  sizes="(max-width: 768px) 100vw, 340px"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700 filter contrast-110"
+                  sizes="(max-width: 768px) 100vw, 420px"
+                  className="object-cover object-top filter contrast-[1.03] brightness-95"
                 />
 
-                {/* Vice City Neon Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#060212] via-transparent to-transparent opacity-80" aria-hidden="true" />
+                {/* Subtle bottom vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0c0a18] via-transparent to-transparent opacity-80" />
 
-                {/* Watermark Tag */}
-                <div className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-[#060212]/90 border border-[#ffcc00] font-mono text-[9px] text-[#ffcc00] font-black uppercase tracking-widest shadow-lg">
-                  WANTED ★★★★★
-                </div>
-
-                {/* Tech Pills */}
-                <div className="absolute bottom-3 left-3 right-3 z-20 flex flex-wrap gap-1.5 font-mono">
-                  <span className="px-2.5 py-1 rounded-md bg-[#060212]/95 border border-[#ff007f] text-[10px] text-white font-black shadow-md">
-                    Next.js 16
-                  </span>
-                  <span className="px-2.5 py-1 rounded-md bg-[#060212]/95 border border-[#00f0ff] text-[10px] text-[#00f0ff] font-black shadow-md">
-                    Full Stack
-                  </span>
-                  <span className="px-2.5 py-1 rounded-md bg-[#060212]/95 border border-[#ffcc00] text-[10px] text-[#ffcc00] font-black shadow-md">
-                    AI Search
-                  </span>
-                </div>
-              </div>
-
-              {/* GTA HUD METERS */}
-              <div className="font-mono space-y-3">
-                <div className="bg-[#04010a]/90 border border-white/10 p-3.5 rounded-xl space-y-2.5 shadow-inner">
-                  {/* Health Bar */}
-                  <div className="flex items-center justify-between text-xs font-black">
-                    <span className="flex items-center gap-1.5 text-[#55ff55]">
-                      <Heart size={14} fill="#55ff55" aria-hidden="true" /> HEALTH:
-                    </span>
-                    <span className="text-[#55ff55] font-mono">100%</span>
+                {/* FLOATING TELEMETRY: BUILD STATUS WIDGET */}
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                  className="absolute bottom-4 right-4 z-20 p-3.5 rounded-2xl bg-[#120f24]/90 border border-purple-500/30 backdrop-blur-xl shadow-xl font-mono text-left"
+                >
+                  <div className="flex items-center gap-1.5 text-[10px] text-purple-300 font-bold uppercase tracking-wider mb-2">
+                    <Activity className="w-3 h-3 text-emerald-400 animate-pulse" />
+                    <span>BUILD STATUS</span>
                   </div>
-                  <div className="w-full h-2.5 bg-slate-950 rounded-full overflow-hidden border border-white/10" role="progressbar" aria-valuenow={100} aria-valuemin={0} aria-valuemax={100} aria-label="Health Status">
-                    <div className="h-full bg-gradient-to-r from-[#55ff55] to-[#22c55e] w-full shadow-[0_0_10px_#55ff55]" />
+                  <div className="flex items-end gap-1 h-5">
+                    <span className="w-1.5 h-3 bg-purple-500 rounded-sm" />
+                    <span className="w-1.5 h-4 bg-purple-400 rounded-sm" />
+                    <span className="w-1.5 h-2 bg-purple-600 rounded-sm" />
+                    <span className="w-1.5 h-5 bg-cyan-400 rounded-sm" />
+                    <span className="w-1.5 h-3.5 bg-purple-400 rounded-sm" />
+                    <span className="w-1.5 h-4.5 bg-emerald-400 rounded-sm" />
                   </div>
+                  <span className="text-[9px] text-slate-400 block mt-1">100% PRODUCTION READY</span>
+                </motion.div>
 
-                  {/* Armor Bar */}
-                  <div className="flex items-center justify-between text-xs font-black pt-1">
-                    <span className="flex items-center gap-1.5 text-[#00f0ff]">
-                      <Shield size={14} fill="#00f0ff" aria-hidden="true" /> ARMOR:
-                    </span>
-                    <span className="text-[#00f0ff] font-mono">100%</span>
-                  </div>
-                  <div className="w-full h-2.5 bg-slate-950 rounded-full overflow-hidden border border-white/10" role="progressbar" aria-valuenow={100} aria-valuemin={0} aria-valuemax={100} aria-label="Armor Status">
-                    <div className="h-full bg-gradient-to-r from-[#00f0ff] to-[#3b82f6] w-full shadow-[0_0_10px_#00f0ff]" />
-                  </div>
-                </div>
-
-                {/* Rating Badge */}
-                <div className="bg-[#04010a]/90 border border-[#ff007f]/40 p-3 rounded-xl flex items-center justify-between">
-                  <span className="text-xs text-slate-300 font-bold uppercase tracking-wider">
-                    OPERATOR CLASS:
-                  </span>
-                  <span className="text-[#ff007f] font-mono font-extrabold text-xs tracking-wider">
-                    LEVEL 99 ARCHITECT
-                  </span>
+                {/* FLOATING LOCATION / NODE BADGE */}
+                <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2 p-2.5 rounded-xl bg-[#120f24]/90 border border-white/10 backdrop-blur-xl text-xs text-slate-200">
+                  <Globe className="w-3.5 h-3.5 text-cyan-400" />
+                  <span className="text-[11px] font-medium">{DATA.personal.location}</span>
                 </div>
               </div>
-
             </div>
           </motion.div>
-
         </div>
       </Container>
+
+      {/* BOTTOM TICKER & SCROLL INDICATOR */}
+      <div className="relative z-10 pt-12">
+        <Container>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-slate-400 font-mono">
+            {/* Left standard tag */}
+            <div className="flex items-center gap-3">
+              <span className="flex items-center gap-1.5 text-purple-400">
+                <Code2 className="w-3.5 h-3.5" />
+                <Globe className="w-3.5 h-3.5 text-cyan-400" />
+                <Cpu className="w-3.5 h-3.5 text-emerald-400" />
+              </span>
+              <span className="uppercase tracking-widest text-[11px] font-semibold text-slate-300">
+                Global Standard Engineering
+              </span>
+            </div>
+
+            {/* Center Scroll Prompt */}
+            <button
+              onClick={() => scrollTo("about-story")}
+              className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer group"
+            >
+              <span className="uppercase tracking-widest text-[10px]">Scroll Down</span>
+              <ChevronDown className="w-3.5 h-3.5 text-purple-400 group-hover:translate-y-0.5 transition-transform" />
+            </button>
+
+            {/* Right stack highlights */}
+            <div className="hidden md:flex items-center gap-2 text-[11px]">
+              <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10">Next.js 16</span>
+              <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10">React 19</span>
+              <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10">FastAPI</span>
+              <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10">Qdrant Vector</span>
+            </div>
+          </div>
+        </Container>
+      </div>
     </section>
   );
 };

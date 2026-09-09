@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@600;800;900&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -15,14 +15,13 @@
   --color-card: var(--card);
   --color-border: var(--border);
 
-  --color-vice-pink: #ff007f;
-  --color-vice-magenta: #ff2a85;
-  --color-vice-cyan: #00f0ff;
-  --color-vice-orange: #ff6b00;
-  --color-vice-purple: #2b0047;
-  --color-vice-dark: #060212;
-  --color-vice-gold: #ffcc00;
+  --color-brand-violet: #8b5cf6;
+  --color-brand-purple: #a855f7;
+  --color-brand-cyan: #06b6d4;
+  --color-brand-indigo: #6366f1;
+  --color-brand-emerald: #10b981;
 
+  --radius-3xl: 1.5rem;
   --radius-2xl: 1.25rem;
   --radius-xl: 1rem;
   --radius-lg: 0.75rem;
@@ -30,33 +29,25 @@
 
 @layer base {
   :root {
-    --background: #060212;
-    --foreground: #ffffff;
-    --primary: #ff007f;
+    --background: #07060c;
+    --foreground: #f8fafc;
+    --primary: #8b5cf6;
     --secondary: #94a3b8;
-    --accent: #00f0ff;
-    --muted: #0c0520;
-    --card: #0d0624;
-    --border: rgba(255, 0, 127, 0.25);
-
-    --vice-pink: #ff007f;
-    --vice-magenta: #ff2a85;
-    --vice-cyan: #00f0ff;
-    --vice-orange: #ff6b00;
-    --vice-purple: #2b0047;
-    --vice-dark: #060212;
-    --vice-gold: #ffcc00;
+    --accent: #06b6d4;
+    --muted: #110e20;
+    --card: #0d0b17;
+    --border: rgba(255, 255, 255, 0.08);
   }
 
   .dark {
-    --background: #060212;
-    --foreground: #ffffff;
-    --primary: #ff007f;
+    --background: #07060c;
+    --foreground: #f8fafc;
+    --primary: #8b5cf6;
     --secondary: #94a3b8;
-    --accent: #00f0ff;
-    --muted: #0c0520;
-    --card: #0d0624;
-    --border: rgba(255, 0, 127, 0.25);
+    --accent: #06b6d4;
+    --muted: #110e20;
+    --card: #0d0b17;
+    --border: rgba(255, 255, 255, 0.08);
   }
 }
 
@@ -67,7 +58,8 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "cv02" 1, "cv03" 1;
-    background-color: #060212;
+    background-color: #07060c;
+    color: #f8fafc;
     overflow-x: hidden;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -77,61 +69,101 @@
   }
 }
 
-/* === HARDWARE ACCELERATED LIGHTWEIGHT TYPOGRAPHY & CARDS === */
-.gta-hero-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 900;
-  background: linear-gradient(135deg, #ffffff 0%, #ff88cc 40%, #ff007f 80%, #ff6b00 100%);
+/* === MODERN ELITE TYPOGRAPHY & GRADIENTS === */
+.title-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #e2d4fd 40%, #a855f7 75%, #38bdf8 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  letter-spacing: -0.04em;
 }
 
-.gta-vi-numeral {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 900;
-  background: linear-gradient(135deg, #ff007f 0%, #ff6b00 50%, #00f0ff 100%);
+.text-gradient-purple {
+  background: linear-gradient(135deg, #c084fc 0%, #8b5cf6 50%, #38bdf8 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  opacity: 0.04;
 }
 
-.gta-vice-gradient-bg {
-  background: radial-gradient(circle at 50% 15%, #1b0033 0%, #060212 75%);
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* === ZERO-LAG LIGHTWEIGHT CARD (GPU HARDWARE ACCELERATED) === */
-.gta-card {
-  background: #0d0624;
-  border: 1px solid rgba(255, 0, 127, 0.25);
-  border-radius: 1.25rem;
+/* === AMBIENT MESH & GLOWS === */
+.bg-ambient-mesh {
+  background: 
+    radial-gradient(circle at 20% 15%, rgba(139, 92, 246, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 80% 25%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+    #07060c;
+}
+
+.bg-dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* === BENTO GRID CARD STYLING === */
+.bento-card {
+  background: rgba(13, 11, 23, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transform: translateZ(0);
-  backface-visibility: hidden;
-  transition: border-color 0.25s ease, transform 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
 }
 
-.gta-card:hover {
-  border-color: rgba(0, 240, 255, 0.6);
-  transform: translateY(-2px);
+.bento-card:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px -5px rgba(139, 92, 246, 0.15);
 }
 
-.gta-cash-text {
-  font-family: 'Space Mono', monospace;
-  color: #55ff55;
+.bento-card-cyan:hover {
+  border-color: rgba(6, 182, 212, 0.4);
+  box-shadow: 0 12px 35px -5px rgba(6, 182, 212, 0.15);
 }
 
-.vice-grid {
-  background-image: 
-    linear-gradient(to right, rgba(255, 0, 127, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
+/* === BUTTON GLOW & PILL BADGES === */
+.btn-primary {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.35);
+  transition: all 0.25s ease;
 }
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #060212; }
+.btn-primary:hover {
+  background: linear-gradient(135deg, #9333ea 0%, #6d28d9 100%);
+  box-shadow: 0 0 35px rgba(139, 92, 246, 0.55);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  color: #f8fafc;
+  transition: all 0.25s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+/* === SLEEK CUSTOM SCROLLBAR === */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #07060c;
+}
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #ff007f, #00f0ff);
+  background: linear-gradient(to bottom, #8b5cf6, #06b6d4);
   border-radius: 99px;
 }

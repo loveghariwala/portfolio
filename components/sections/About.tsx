@@ -1,189 +1,238 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { DATA } from "@/constants/data";
-import { Zap, Code2, Sparkles, Heart, Shield, ShieldAlert, Cpu, Award } from "lucide-react";
-
-const highlights = [
-  { icon: Zap, label: "Performance", value: "Sub-50ms SSR", color: "#00f0ff" },
-  { icon: Code2, label: "Architecture", value: "Clean & Modular", color: "#ff007f" },
-  { icon: Sparkles, label: "Design System", value: "Pixel Perfect", color: "#ffcc00" },
-];
+import {
+  Code2,
+  Cpu,
+  Database,
+  Globe,
+  Layers,
+  ShieldCheck,
+  Sparkles,
+  Zap,
+  Terminal,
+  BrainCircuit,
+  ArrowRight,
+  Search,
+} from "lucide-react";
 
 export const About = () => {
   return (
-    <section id="about-story" className="py-24 relative gta-vice-gradient-bg font-mono" aria-labelledby="about-heading">
-      <div className="absolute inset-0 vice-grid opacity-15 pointer-events-none" />
+    <section
+      id="about-story"
+      className="py-24 sm:py-32 relative bg-[#07060c] bg-ambient-mesh"
+      aria-labelledby="about-heading"
+    >
+      <div className="absolute inset-0 bg-dot-grid opacity-20 pointer-events-none" />
 
       <Container className="relative z-10">
-        {/* SECTION HEADING (ACCESSIBLE H2) */}
-        <div className="flex flex-col items-start mb-12">
-          <div className="flex items-center gap-2 text-xs text-[#00f0ff] font-extrabold uppercase tracking-widest mb-2">
-            <Award size={16} className="text-[#ff007f]" aria-hidden="true" />
-            <span>// DEVELOPER DOSSIER</span>
+        {/* SECTION HEADER */}
+        <div className="flex flex-col items-start mb-16 max-w-2xl">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs text-purple-400 font-mono font-semibold uppercase tracking-wider mb-3">
+            <Cpu className="w-3.5 h-3.5" />
+            <span>// ABOUT ME</span>
           </div>
-          <h2 id="about-heading" className="text-4xl sm:text-6xl font-black font-heading tracking-tight text-white uppercase">
-            CRAFTING <span className="gta-vi-logo-text">DIGITAL PRODUCTS</span>
+          <h2
+            id="about-heading"
+            className="text-3xl sm:text-5xl font-extrabold font-heading text-white tracking-tight leading-tight mb-4"
+          >
+            Building web apps that{" "}
+            <span className="title-gradient">solve real problems.</span>
           </h2>
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            I work across the full stack — from crafting clean, responsive user interfaces to engineering reliable backend APIs, databases, and smart search features.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          
-          {/* LEFT: GTA CHARACTER SPECIFICATION CARD (5 Cols) */}
+        {/* BENTO GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+          {/* BENTO CARD 1: CORE PHILOSOPHY & CAPABILITIES (8 Cols) */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
-            className="lg:col-span-5 relative"
+            className="md:col-span-12 lg:col-span-8 bento-card p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden"
           >
-            <div className="gta-card rounded-3xl p-6 relative overflow-hidden border border-[#ff007f]/40">
-              
-              {/* Header Bar */}
-              <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6 text-xs">
-                <div className="flex items-center gap-2 text-white font-extrabold uppercase">
-                  <Cpu size={16} className="text-[#ff007f]" aria-hidden="true" />
-                  <span>CHARACTER SPECIFICATION</span>
-                </div>
-                <span className="text-[10px] text-[#00f0ff] font-bold">VICE CITY // SURAT</span>
+            <div className="relative z-10">
+              <div className="flex items-center justify-between gap-4 mb-6">
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-purple-400">
+                  Full Stack Development
+                </span>
+                <span className="text-[11px] font-mono text-slate-400 px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
+                  Next.js + FastAPI + Postgres
+                </span>
               </div>
 
-              {/* Character Details Box with Small Top-Right GTA 6 Avatar */}
-              <div className="bg-[#060212] border border-white/10 p-5 rounded-2xl mb-6">
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <div className="space-y-3">
-                    <div>
-                      <span className="text-[9px] text-[#00f0ff] font-extrabold uppercase tracking-widest block">
-                        AGENT NAME
-                      </span>
-                      <div className="text-2xl font-black font-heading text-white uppercase">
-                        {DATA.personal.name}
-                      </div>
-                    </div>
+              <h3 className="text-2xl sm:text-3xl font-extrabold font-heading text-white mb-4">
+                End-to-End Web Applications
+              </h3>
 
-                    <div>
-                      <span className="text-[9px] text-slate-300 font-bold uppercase tracking-widest block">
-                        PRIMARY ROLE
-                      </span>
-                      <p className="text-xs text-[#ff007f] font-bold font-sans">
-                        {DATA.personal.role}
-                      </p>
-                    </div>
-                  </div>
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6 font-normal">
+                {DATA.personal.bio}
+              </p>
 
-                  {/* SMALL GTA 6 CHARACTER ARTWORK IN TOP RIGHT CORNER */}
-                  <div className="relative w-16 h-16 rounded-xl border-2 border-[#ff007f] overflow-hidden shadow-[0_0_15px_rgba(255,0,127,0.4)] shrink-0 bg-[#060212]">
-                    <Image
-                      src="/profile/gta_character_love_ghariwala.png"
-                      alt="GTA 6 Character Love Ghariwala"
-                      fill
-                      sizes="64px"
-                      className="object-cover"
-                    />
+              {/* Three Core Tenets */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10">
+                <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
+                  <div className="flex items-center gap-2 text-purple-400 font-bold text-xs mb-1 font-mono">
+                    <Zap className="w-3.5 h-3.5" />
+                    <span>Fast & Snappy</span>
                   </div>
+                  <p className="text-xs text-slate-400 leading-snug">
+                    Quick page loads, smooth navigation, and optimized frontend performance.
+                  </p>
                 </div>
 
-                <div className="pt-3 border-t border-white/10 flex items-center justify-between">
-                  <span className="text-[10px] text-slate-300 font-bold uppercase">VALUATION:</span>
-                  <span className="gta-cash-text text-sm font-black">$40,000,000</span>
-                </div>
-              </div>
-
-              {/* GTA Status Meters (Health, Armor, Wanted Rating) */}
-              <div className="space-y-3">
-                <div className="bg-[#060212] border border-white/10 p-3.5 rounded-xl space-y-2.5">
-                  <div className="flex items-center justify-between text-xs font-bold">
-                    <span className="flex items-center gap-1.5 text-[#55ff55]">
-                      <Heart size={14} fill="#55ff55" aria-hidden="true" /> HEALTH:
-                    </span>
-                    <span className="text-[#55ff55]">100%</span>
+                <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
+                  <div className="flex items-center gap-2 text-cyan-400 font-bold text-xs mb-1 font-mono">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>Safe & Secure</span>
                   </div>
-                  <div className="w-full h-2 bg-slate-950 rounded-full overflow-hidden border border-white/10" role="progressbar" aria-valuenow={100} aria-valuemin={0} aria-valuemax={100} aria-label="Agent Health">
-                    <div className="h-full bg-[#55ff55] w-full" />
-                  </div>
-
-                  <div className="flex items-center justify-between text-xs font-bold pt-1">
-                    <span className="flex items-center gap-1.5 text-[#00f0ff]">
-                      <Shield size={14} fill="#00f0ff" aria-hidden="true" /> ARMOR:
-                    </span>
-                    <span className="text-[#00f0ff]">100%</span>
-                  </div>
-                  <div className="w-full h-2 bg-slate-950 rounded-full overflow-hidden border border-white/10" role="progressbar" aria-valuenow={100} aria-valuemin={0} aria-valuemax={100} aria-label="Agent Armor">
-                    <div className="h-full bg-[#00f0ff] w-full" />
-                  </div>
+                  <p className="text-xs text-slate-400 leading-snug">
+                    Secure user logins, payment integrations (Razorpay, Stripe), and protected APIs.
+                  </p>
                 </div>
 
-                {/* Wanted Level 5 Stars */}
-                <div className="bg-[#060212] border border-[#ff007f]/40 p-3.5 rounded-xl flex items-center justify-between">
-                  <span className="text-xs text-slate-300 font-bold uppercase tracking-wider flex items-center gap-2">
-                    <ShieldAlert size={16} className="text-[#ffcc00]" aria-hidden="true" />
-                    SKILL RATING:
-                  </span>
-                  <div className="text-[#ffcc00] text-base font-bold tracking-widest whitespace-nowrap select-none">
-                    ★ ★ ★ ★ ★
+                <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
+                  <div className="flex items-center gap-2 text-emerald-400 font-bold text-xs mb-1 font-mono">
+                    <Layers className="w-3.5 h-3.5" />
+                    <span>Clean Code</span>
                   </div>
-
+                  <p className="text-xs text-slate-400 leading-snug">
+                    Modular components and organized backend routes that are easy to maintain.
+                  </p>
                 </div>
               </div>
-
             </div>
+
+            {/* Subtle background gradient splash */}
+            <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
           </motion.div>
 
-          {/* RIGHT: STORY CONTENT (7 Cols) */}
+          {/* BENTO CARD 2: APPLIED AI & SMART SEARCH (4 Cols) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="lg:col-span-7 flex flex-col justify-between"
+            className="md:col-span-12 lg:col-span-4 bento-card bento-card-cyan p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden"
           >
             <div>
-              <p className="text-base sm:text-lg text-slate-200 font-sans leading-relaxed mb-6 font-normal">
-                Hello, I&apos;m <span className="text-white font-bold">{DATA.personal.name}</span>, a Frontend &amp; Backend Developer based in <span className="text-[#00f0ff] font-bold">{DATA.personal.location}</span>.
+              <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-cyan-400 mb-6">
+                <BrainCircuit className="w-4 h-4" />
+                <span>Smart Search & AI</span>
+              </div>
+
+              <h3 className="text-xl sm:text-2xl font-extrabold font-heading text-white mb-3">
+                Context-Aware Discovery
+              </h3>
+
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
+                Using tools like Hugging Face and Qdrant vector databases to help users find what they are looking for based on meaning and context, not just exact keywords.
               </p>
 
-              <div className="space-y-4 text-xs sm:text-sm text-slate-300 font-sans leading-relaxed mb-8">
-                <p>
-                  <strong className="text-[#00f0ff] font-bold">Frontend Engineering:</strong> I build scalable, high-performance web applications leveraging Next.js (App Router, Server Components, SSR/SSG), React, and TypeScript. My focus centers on clean architecture, reusable component design, dynamic state management, and performance-driven, accessible UI crafted with Tailwind CSS and Framer Motion.
-                </p>
-                <p>
-                  <strong className="text-[#ff007f] font-bold">Backend &amp; API Architecture:</strong> On the server side, I engineer robust RESTful APIs and microservices using Node.js, Express, and FastAPI. I specialize in schema design and query optimization across PostgreSQL, Supabase, and MongoDB, secure authentication (JWT/OAuth), and seamless payment gateway and webhook integrations.
-                </p>
-                <p>
-                  <strong className="text-[#a855f7] font-bold">GenAI &amp; Applied AI Practice:</strong> Beyond traditional web development, I actively implement applied Generative AI solutions in production. This includes architecting Retrieval-Augmented Generation (RAG) pipelines, semantic vector search with Qdrant, sentence-transformer embeddings via Hugging Face, and intelligent LLM integrations to power context-aware digital products.
-                </p>
+              <div className="space-y-2 font-mono text-xs">
+                <div className="flex items-center justify-between p-2.5 rounded-lg bg-black/40 border border-white/5">
+                  <span className="text-slate-400">Embedding Dim:</span>
+                  <span className="text-cyan-400 font-bold">384 (all-MiniLM-L6)</span>
+                </div>
+                <div className="flex items-center justify-between p-2.5 rounded-lg bg-black/40 border border-white/5">
+                  <span className="text-slate-400">Index Type:</span>
+                  <span className="text-purple-400 font-bold">HNSW Cosine</span>
+                </div>
+                <div className="flex items-center justify-between p-2.5 rounded-lg bg-black/40 border border-white/5">
+                  <span className="text-slate-400">Experience:</span>
+                  <span className="text-emerald-400 font-bold">Instant & Smooth</span>
+                </div>
               </div>
             </div>
 
-            {/* HIGHLIGHT CARDS */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {highlights.map((h) => {
-                const HIcon = h.icon;
-                return (
-                  <div
-                    key={h.label}
-                    className="gta-card p-4 text-center border-t-2"
-                    style={{ borderTopColor: h.color }}
-                  >
-                    <div
-                      className="w-8 h-8 rounded-lg mx-auto mb-2 flex items-center justify-center"
-                      style={{ backgroundColor: `${h.color}20`, border: `1px solid ${h.color}` }}
-                    >
-                      <HIcon size={16} style={{ color: h.color }} aria-hidden="true" />
-                    </div>
-                    <span className="text-[10px] text-slate-300 font-bold uppercase block mb-1">
-                      {h.label}
-                    </span>
-                    <span className="text-xs text-white font-extrabold block">
-                      {h.value}
-                    </span>
-                  </div>
-                );
-              })}
+            <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-400 font-mono">
+              <span>Production Live in NeoCinemaTV</span>
+              <ArrowRight className="w-3.5 h-3.5 text-cyan-400" />
             </div>
+          </motion.div>
 
+          {/* BENTO CARD 3: SYSTEM DESIGN & DATABASE MODELING (4 Cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="md:col-span-6 lg:col-span-4 bento-card p-6 sm:p-8"
+          >
+            <div className="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/20 w-fit mb-4 text-purple-400">
+              <Database className="w-5 h-5" />
+            </div>
+            <h3 className="text-lg font-bold font-heading text-white mb-2">
+              Databases & Storage
+            </h3>
+            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+              Working with PostgreSQL, Supabase, and MongoDB. Experienced in organizing product catalogs, managing user data, and caching to keep everything running fast.
+            </p>
+            <div className="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <span className="px-2 py-0.5 rounded bg-white/5 text-purple-300">PostgreSQL</span>
+              <span className="px-2 py-0.5 rounded bg-white/5 text-purple-300">Supabase</span>
+              <span className="px-2 py-0.5 rounded bg-white/5 text-purple-300">MongoDB</span>
+              <span className="px-2 py-0.5 rounded bg-white/5 text-purple-300">Redis</span>
+            </div>
+          </motion.div>
+
+          {/* BENTO CARD 4: SEAMLESS DEVELOPER TOOLING & CI/CD (4 Cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="md:col-span-6 lg:col-span-4 bento-card p-6 sm:p-8"
+          >
+            <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/20 w-fit mb-4 text-cyan-400">
+              <Terminal className="w-5 h-5" />
+            </div>
+            <h3 className="text-lg font-bold font-heading text-white mb-2">
+              Deployment & Tools
+            </h3>
+            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+              Setting up smooth deployments using Git, GitHub, Vercel, and Docker. Making sure web apps deploy automatically and run reliably without downtime.
+            </p>
+            <div className="flex flex-wrap gap-1.5 font-mono text-[11px]">
+              <span className="px-2 py-0.5 rounded bg-white/5 text-cyan-300">Git & GitHub</span>
+              <span className="px-2 py-0.5 rounded bg-white/5 text-cyan-300">Vercel</span>
+              <span className="px-2 py-0.5 rounded bg-white/5 text-cyan-300">Docker</span>
+              <span className="px-2 py-0.5 rounded bg-white/5 text-cyan-300">CI/CD</span>
+            </div>
+          </motion.div>
+
+          {/* BENTO CARD 5: GLOBAL COLLABORATION & TIMEZONE (4 Cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.4 }}
+            className="md:col-span-12 lg:col-span-4 bento-card p-6 sm:p-8 flex flex-col justify-between"
+          >
+            <div>
+              <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 w-fit mb-4 text-emerald-400">
+                <Globe className="w-5 h-5" />
+              </div>
+              <h3 className="text-lg font-bold font-heading text-white mb-2">
+                Worldwide Collaboration
+              </h3>
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                Based in <strong className="text-white">Surat, Gujarat, India</strong>. Comfortable collaborating across different timezones and open to remote positions, freelance projects, or on-site relocation.
+              </p>
+            </div>
+            <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-emerald-400">
+              <span className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                Available for new roles
+              </span>
+              <span className="text-slate-400">Remote / Relocation</span>
+            </div>
           </motion.div>
 
         </div>
